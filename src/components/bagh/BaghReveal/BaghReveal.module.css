@@ -1,0 +1,219 @@
+/* =========================================================
+   "बाग़" reveal — dark stage, video, SVG parda, gradient fal
+   ========================================================= */
+
+.track {
+  position: relative;
+  height: 340vh; /* fallback */
+  height: 340svh; /* phone: thoda chhota */
+}
+
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+  .track {
+    height: 420vh;
+  }
+}
+
+.track[data-static] {
+  height: 100vh;
+  height: 100svh;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--ink-950);
+  isolation: isolate;
+}
+
+/* ---------- Video ---------- */
+.media {
+  position: absolute;
+  inset: 0;
+  will-change: opacity;
+}
+
+.poster,
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Video tab dikhe jab sach mein chal rahi ho — tab tak poster */
+.video {
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out);
+}
+
+.media[data-playing="true"] .video {
+  opacity: 1;
+}
+
+/* ---------- Parda (canvas) ---------- */
+.cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* JS hisaab laga le, tab tak sirf video */
+  pointer-events: none;
+}
+
+.cover[data-ready="true"] {
+  opacity: 1;
+}
+
+/* Shabd ka font — JS isi se naapta hai (dikhta nahi) */
+.measure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.measure:lang(en) {
+  font-weight: 700;
+}
+
+/* ---------- Caption (video ke kone pe) ---------- */
+.caption {
+  position: absolute;
+  left: var(--gutter);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(1.25rem, 4vh, 2.5rem));
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 10px 14px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--ivory-50);
+  background: rgba(5, 13, 9, 0.32);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--lime-400);
+  box-shadow: 0 0 0 4px rgba(198, 243, 107, 0.2);
+}
+
+/* ---------- Shabd ke neeche line ---------- */
+.sub {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 70%; /* JS sahi jagah set karta hai */
+  z-index: 2;
+  padding-inline: var(--gutter);
+  text-align: center;
+  font-size: var(--fs-lead);
+  color: var(--text-muted);
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* ---------- Aakhri hissa: fal + headline ---------- */
+.end {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: clamp(0.75rem, 2.4vh, 1.5rem);
+  padding-inline: var(--gutter);
+  text-align: center;
+  pointer-events: none;
+}
+
+.fruits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 0.32em;
+  row-gap: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 1.4rem + 8vw, 9.5rem);
+  line-height: 1.05;
+}
+
+.fruits:lang(en) {
+  font-weight: 600;
+  letter-spacing: -0.045em;
+}
+
+.fruits:lang(hi) {
+  line-height: 1.2;
+}
+
+/* Har fal apne rang ke gradient mein. padding = Hindi maatraayein na katein */
+.fruit {
+  display: inline-block;
+  padding: 0.12em 0.04em 0.1em;
+  margin: -0.12em -0.04em -0.1em;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.mango {
+  background-image: linear-gradient(100deg, #ffe08a 0%, #f6b941 45%, #f08a2c 100%);
+}
+
+.guava {
+  background-image: linear-gradient(100deg, #c6f36b 0%, #8fd16a 40%, #ff8fa3 100%);
+}
+
+.litchi {
+  background-image: linear-gradient(100deg, #ffc2c2 0%, #f2546b 50%, #c81d4a 100%);
+}
+
+.head {
+  color: var(--text-strong);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.more {
+  max-width: 34ch;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--text-muted);
+  text-wrap: balance;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Reduced motion: seedha aakhri haalat */
+.track[data-static] .media,
+.track[data-static] .cover,
+.track[data-static] .caption {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video {
+    transition: none;
+  }
+}

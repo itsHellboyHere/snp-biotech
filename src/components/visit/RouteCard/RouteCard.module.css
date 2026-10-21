@@ -1,0 +1,196 @@
+.section {
+  padding-block: clamp(1rem, 2vw, 2rem) clamp(2.5rem, 2rem + 3vw, 4.5rem);
+}
+
+.card {
+  display: grid;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #fffdf9;
+  box-shadow:
+    0 0 0 1px rgba(10, 26, 18, 0.06),
+    0 40px 80px -60px rgba(10, 26, 18, 0.6);
+}
+
+@media (min-width: 1000px) {
+  .card {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    background: linear-gradient(90deg, #fffdf9 45%, #f1ecdf 45%);
+  }
+}
+
+/* ---------- Jaankari ---------- */
+.info {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 14px;
+  padding: clamp(1.5rem, 1rem + 3vw, 3.25rem);
+}
+
+.title {
+  max-width: 16ch;
+}
+
+.address {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--forest-900);
+}
+
+.address svg {
+  flex: none;
+  margin-top: 3px;
+  color: var(--leaf-500);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 50px;
+  padding-inline: 20px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+.primary {
+  color: var(--ivory-50);
+  background: var(--forest-900);
+}
+
+.secondary {
+  color: var(--forest-900);
+  background: rgba(10, 26, 18, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.1);
+}
+
+.secondary:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+@media (hover: hover) {
+  .primary:hover {
+    background: var(--forest-800);
+  }
+  .secondary:not(:disabled):hover {
+    background: rgba(10, 26, 18, 0.09);
+  }
+}
+
+.primary:active,
+.secondary:active {
+  transform: scale(0.97);
+}
+
+.result {
+  min-height: 1.5em;
+  font-size: 0.9375rem;
+  color: var(--stone-700);
+}
+
+.result strong {
+  color: var(--forest-900);
+}
+
+.privacy {
+  font-size: 0.8125rem;
+  color: var(--stone-500);
+}
+
+/* ---------- Naksha ---------- */
+.map {
+  position: relative;
+  aspect-ratio: 600 / 420;
+  background: #f1ecdf;
+}
+
+@media (min-width: 1000px) {
+  .map {
+    align-self: center;
+  }
+}
+
+.art,
+.frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.art {
+  display: block;
+}
+
+.youText {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  fill: #fffdf9;
+}
+
+.pulse {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: pulse 2.4s var(--ease-out) infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Pin ke safed gole ke andar asli logo ke patte (SVG ke 486,70 → %) */
+.pinMark {
+  position: absolute;
+  left: 81%;
+  top: 16.67%;
+  width: 4.4%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  pointer-events: none;
+}
+
+.pinMark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.kmPill {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  translate: -50% -50%;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-family: var(--font-display-en);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--forest-900);
+  background: var(--lime-400);
+  box-shadow: 0 12px 24px -12px rgba(10, 26, 18, 0.6);
+}

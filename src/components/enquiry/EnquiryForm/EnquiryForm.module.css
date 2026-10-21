@@ -1,0 +1,379 @@
+.section {
+  padding-block: clamp(2rem, 1.5rem + 3vw, 4rem);
+}
+
+.card {
+  display: grid;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #fffdf9;
+  box-shadow:
+    0 0 0 1px rgba(10, 26, 18, 0.06),
+    0 40px 80px -60px rgba(10, 26, 18, 0.55);
+}
+
+@media (min-width: 960px) {
+  .card {
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+}
+
+/* ---------- Baayein (dark) ---------- */
+.intro {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: clamp(1.75rem, 1rem + 3vw, 3.25rem);
+  color: var(--ivory-50);
+  background: var(--forest-900);
+  overflow: hidden;
+}
+
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 45% -30% -40%;
+  z-index: -1;
+  background: var(--grad-dawn);
+  opacity: 0.7;
+}
+
+.eyebrow {
+  color: rgba(245, 241, 232, 0.55);
+}
+
+.title {
+  max-width: 14ch;
+  color: var(--ivory-50);
+}
+
+.line {
+  max-width: 40ch;
+  line-height: 1.6;
+  color: rgba(245, 241, 232, 0.75);
+}
+
+.points {
+  display: grid;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.points li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(245, 241, 232, 0.88);
+}
+
+.points svg {
+  flex: none;
+  padding: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: var(--forest-900);
+  background: var(--lime-400);
+}
+
+.direct {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.directLabel {
+  font-size: 0.875rem;
+  color: rgba(245, 241, 232, 0.55);
+}
+
+.directBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 40px;
+  padding-inline: 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ivory-50);
+  background: rgba(245, 241, 232, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(245, 241, 232, 0.18);
+}
+
+/* ---------- Daayein: form ---------- */
+.panel {
+  padding: clamp(1.5rem, 1rem + 2.5vw, 3rem);
+}
+
+.form {
+  position: relative;
+  display: grid;
+  gap: 16px;
+}
+
+.row2 {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .row2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+.label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--forest-900);
+}
+
+.hint {
+  font-weight: 400;
+  color: var(--stone-500);
+}
+
+.input {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 16px;
+  font-size: 1rem; /* 16px — iPhone pe zoom nahi hota */
+  color: var(--forest-900);
+  background: #f6f2e9;
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.1);
+  outline: none;
+  transition:
+    box-shadow var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.input::placeholder {
+  color: #a9a597;
+}
+
+.input:focus {
+  background: #fffdf9;
+  box-shadow:
+    inset 0 0 0 2px var(--leaf-500),
+    0 0 0 5px rgba(79, 138, 91, 0.12);
+}
+
+.input[aria-invalid="true"] {
+  box-shadow: inset 0 0 0 2px #c2412d;
+}
+
+.textarea {
+  height: auto;
+  min-height: 104px;
+  padding-block: 14px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.phoneWrap {
+  position: relative;
+}
+
+.prefix {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  translate: 0 -50%;
+  font-weight: 600;
+  color: var(--stone-500);
+  pointer-events: none;
+}
+
+.phone {
+  padding-left: 54px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.error {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #c2412d;
+}
+
+/* ---------- Kis baare mein (chips) ---------- */
+.types {
+  display: grid;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding-inline: 16px;
+  border-radius: var(--radius-pill);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--forest-900);
+  background: #f6f2e9;
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.1);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.chip[data-on="true"] {
+  color: var(--ivory-50);
+  background: var(--forest-900);
+  box-shadow: none;
+}
+
+.chip:has(input:focus-visible) {
+  outline: 2px solid var(--leaf-500);
+  outline-offset: 2px;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  color: var(--forest-900);
+  background: rgba(198, 243, 107, 0.35);
+  cursor: pointer;
+}
+
+.check input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--forest-900);
+}
+
+/* ---------- Bhejo ---------- */
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 56px;
+  margin-top: 4px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  color: var(--forest-900);
+  background: var(--lime-400);
+  box-shadow: 0 16px 34px -18px rgba(79, 138, 91, 0.9);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out),
+    opacity var(--dur-base) var(--ease-out);
+}
+
+.submit:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+@media (hover: hover) {
+  .submit:not(:disabled):hover {
+    background: #d4f78a;
+  }
+}
+
+.submit:active {
+  transform: scale(0.98);
+}
+
+.honey {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ---------- Fail ---------- */
+.fail {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 18px;
+  color: #6a2a1c;
+  background: #fbe9e4;
+}
+
+.fail p {
+  font-size: 0.9375rem;
+}
+
+.failActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding-inline: 18px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  color: var(--forest-900);
+  background: var(--lime-400);
+}
+
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 48px;
+  padding-inline: 18px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  color: var(--forest-900);
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.18);
+}
+
+/* ---------- Ho gaya ---------- */
+.done {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 10px;
+  min-height: 360px;
+  text-align: center;
+  color: var(--stone-700);
+}
+
+.done svg {
+  color: var(--leaf-500);
+}
+
+.done h3 {
+  color: var(--forest-900);
+}

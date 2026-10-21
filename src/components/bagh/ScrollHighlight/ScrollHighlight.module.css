@@ -1,0 +1,49 @@
+.wrap {
+  display: grid;
+  gap: var(--space-6);
+  max-width: 30ch;
+  font-size: clamp(1.875rem, 1.05rem + 3.1vw, 4rem);
+}
+
+.eyebrow {
+  font-size: var(--fs-small);
+}
+
+.para {
+  font-family: var(--font-display);
+  line-height: 1.22;
+  color: var(--text-strong);
+  text-wrap: pretty;
+}
+
+.para:lang(en) {
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.para:lang(hi) {
+  line-height: 1.5;
+}
+
+.word {
+  opacity: 0.16;
+  transition: color 500ms var(--ease-out);
+}
+
+/* Khaas hissa — roshan hone pe gradient */
+.hl[data-lit="true"] {
+  color: transparent;
+  background-image: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* Hindi maatraayein na katein */
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Light background (ivory) pe — gehra hara → aam ka rang */
+.wrap[data-tone="light"] .hl[data-lit="true"] {
+  background-image: linear-gradient(100deg, #3b7d2a 0%, #b8790f 100%);
+}

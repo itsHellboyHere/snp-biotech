@@ -1,0 +1,75 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (min-width: 760px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (min-width: 1180px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+  }
+}
+
+.item {
+  container: card / inline-size;
+  min-width: 0;
+}
+
+/* ---------- Kuch nahi mila ---------- */
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: clamp(3rem, 8vw, 6rem) 1.5rem;
+  border-radius: 28px;
+  text-align: center;
+  color: var(--stone-500);
+  background: #fffdf9;
+  box-shadow: 0 0 0 1px rgba(10, 26, 18, 0.06);
+}
+
+.emptyTitle {
+  color: var(--forest-900);
+}
+
+.emptyLine {
+  max-width: 36ch;
+  color: var(--stone-700);
+}
+
+.emptyActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ask,
+.reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding-inline: 20px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+}
+
+.ask {
+  color: var(--ivory-50);
+  background: var(--forest-900);
+}
+
+.reset {
+  color: var(--forest-900);
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.18);
+}

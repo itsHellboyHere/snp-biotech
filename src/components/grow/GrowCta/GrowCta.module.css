@@ -1,0 +1,86 @@
+.section {
+  background: #faf8f3;
+  padding-bottom: var(--space-section);
+}
+
+/* Dark card + neeche se sunehri roshni */
+.card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  padding: clamp(3rem, 2rem + 6vw, 7rem) clamp(1.25rem, 4vw, 4rem);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  color: var(--ivory-50);
+  background: var(--forest-900);
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--grad-dawn);
+}
+
+.title {
+  max-width: 18ch;
+  color: var(--ivory-50);
+}
+
+.line {
+  max-width: 40ch;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: rgba(245, 241, 232, 0.72); /* section light hai, card dark — isliye seedha rang */
+  text-wrap: balance;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: var(--space-4);
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 52px;
+  padding-inline: 22px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+.primary {
+  color: var(--forest-900);
+  background: var(--lime-400);
+}
+
+.secondary {
+  color: var(--ivory-50);
+  background: rgba(245, 241, 232, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(245, 241, 232, 0.2);
+}
+
+@media (hover: hover) {
+  .primary:hover {
+    background: #d4f78a;
+  }
+  .secondary:hover {
+    background: rgba(245, 241, 232, 0.14);
+  }
+}
+
+.primary:active,
+.secondary:active {
+  transform: scale(0.97);
+}

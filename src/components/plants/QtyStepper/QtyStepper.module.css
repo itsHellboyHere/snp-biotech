@@ -1,0 +1,65 @@
+.stepper {
+  position: relative;
+  z-index: 2; /* card ke "poore card pe click" layer ke upar */
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: var(--forest-900);
+  color: var(--ivory-50);
+  box-shadow: 0 10px 24px -14px rgba(10, 26, 18, 0.7);
+  touch-action: manipulation; /* jaldi-jaldi tap pe zoom nahi */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.stepper[data-size="lg"] {
+  grid-template-columns: 52px 1fr 52px;
+  height: 54px;
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  color: inherit;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.btn:active {
+  transform: scale(0.88);
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    background: rgba(245, 241, 232, 0.12);
+  }
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  text-align: center;
+  font-family: var(--font-display-en);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  font-variant-numeric: tabular-nums;
+  color: inherit;
+  outline: none;
+}
+
+.stepper[data-size="lg"] .input {
+  font-size: 1.25rem;
+}
+
+.input:focus {
+  color: var(--lime-400);
+}

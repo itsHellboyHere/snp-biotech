@@ -1,0 +1,84 @@
+.photo,
+.brand {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  container-type: size; /* text tile ke size ke hisaab se scale ho (cqw) — phone ho ya desktop */
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%; /* portrait photo landscape tile mein — paudha beech mein rahe */
+}
+
+/* Neeche halka andhera taaki naam saaf padhe */
+.photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(5, 13, 9, 0.78) 0%, rgba(5, 13, 9, 0) 42%);
+}
+
+.caption {
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  bottom: 7%;
+  z-index: 1;
+  display: grid;
+  gap: 1px;
+  font-family: var(--font-display);
+  font-size: 12cqw;
+  line-height: 1.2;
+  color: var(--ivory-50);
+}
+
+.en {
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-size: 0.62em;
+  color: rgba(245, 241, 232, 0.7);
+}
+
+/* Brand tile — dawn gradient, jaise sooraj ki roshni */
+.brand {
+  display: grid;
+  align-content: end;
+  gap: 4px;
+  padding: 10%;
+  background:
+    radial-gradient(120% 90% at 30% 110%, rgba(246, 185, 65, 0.95) 0%, rgba(198, 243, 107, 0.55) 38%, rgba(16, 38, 26, 0) 72%),
+    linear-gradient(160deg, var(--forest-700), var(--ink-950));
+  color: var(--ivory-50);
+}
+
+.brandBig {
+  font-family: var(--font-display);
+  font-size: 19cqw;
+  line-height: 1.1;
+}
+
+.brandSmall {
+  font-size: 7.5cqw;
+  color: rgba(245, 241, 232, 0.85);
+}
+
+/* English tiles — Sora, thoda tight aur semibold (Hindi wale Tiro jaisa wazan) */
+.caption:lang(en),
+.brandBig:lang(en) {
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+.caption:lang(en) {
+  font-size: 10.5cqw;
+}
+.brandBig:lang(en) {
+  font-size: 15cqw;
+}
+.en:lang(hi) {
+  letter-spacing: 0;
+}

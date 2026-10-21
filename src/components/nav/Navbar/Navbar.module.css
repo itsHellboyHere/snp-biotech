@@ -1,0 +1,333 @@
+/* =========================================================
+   Navbar — saaf, full-width
+   - Page ke top pe: transparent, bas logo + links + CTA (hero ke saath ghul jaye)
+   - Scroll ke baad: liquid glass + hairline + halki shadow
+   - Active/hover link ke neeche patli gradient line slide karti hai
+   - Neeche scroll pe chhupti, upar pe wapas
+   ========================================================= */
+
+.wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 80;
+  transition: transform 600ms var(--ease-out);
+}
+
+.wrap[data-hidden="true"] {
+  transform: translateY(-105%);
+}
+
+/* Liquid glass — hamesha (top pe bhi). Scroll ke baad shadow thodi gehri. */
+.bar {
+  position: relative;
+  padding-top: env(safe-area-inset-top, 0px);
+  color: var(--forest-900);
+  background: linear-gradient(180deg, rgba(252, 251, 247, 0.82) 0%, rgba(250, 248, 243, 0.68) 100%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transition: box-shadow 500ms var(--ease-out);
+}
+
+/* Upar ki glass chamak */
+.bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 60%);
+  mix-blend-mode: soft-light;
+}
+
+/* Neeche ki line — kinaron pe halki, beech mein hari-lime chamak */
+.bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 26, 18, 0.06) 0%,
+    rgba(10, 26, 18, 0.12) 20%,
+    rgba(79, 138, 91, 0.55) 50%,
+    rgba(10, 26, 18, 0.12) 80%,
+    rgba(10, 26, 18, 0.06) 100%
+  );
+}
+
+.wrap[data-scrolled="true"] .bar {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 14px 34px -24px rgba(10, 26, 18, 0.5);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: 64px;
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- Logo (asli SNP Biotech logo — components/brand/brandData.js) ---------- */
+.logo {
+  flex-shrink: 0;
+  border-radius: 10px;
+}
+
+/* Asli logo (patte + SNP BIOTECH) — rang: text gehra hara, patte hare */
+.logoSvg {
+  display: block;
+  width: auto;
+  height: 48px;
+  color: #183d2b;
+  transition: transform 600ms var(--ease-out);
+  transform-origin: 30% 60%;
+}
+
+@media (hover: hover) {
+  .logo:hover .logoSvg {
+    transform: scale(1.04);
+  }
+}
+
+@media (min-width: 1080px) {
+  .logoSvg {
+    height: 60px;
+  }
+}
+
+/* ---------- Links ---------- */
+.nav {
+  position: relative;
+  display: none;
+  align-items: center;
+  gap: clamp(0.125rem, 0.8vw, 0.75rem);
+  margin-inline: auto;
+}
+
+.link {
+  position: relative;
+  z-index: 1;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans-en);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: rgba(10, 26, 18, 0.6);
+  white-space: nowrap;
+  transition: color 320ms var(--ease-out);
+}
+
+.link[data-hover="true"] {
+  color: var(--forest-900);
+}
+
+/* ACTIVE section — gehra text + glass pill (neeche) */
+.link[data-active="true"] {
+  color: var(--forest-900);
+  font-weight: 600;
+}
+
+/* Active pill — safed glass, andar halki hari ring */
+.pill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 40px;
+  width: var(--w, 0px);
+  transform: translate(var(--x, 0px), -50%);
+  border-radius: var(--radius-pill);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.7));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 0 0 1px rgba(79, 138, 91, 0.22),
+    0 6px 18px -10px rgba(10, 26, 18, 0.35);
+  opacity: 0;
+  transition:
+    transform 560ms var(--ease-out),
+    width 560ms var(--ease-out),
+    opacity 300ms var(--ease-out);
+}
+
+/* HOVER — text ke neeche patli gradient line */
+.line {
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  z-index: 2;
+  width: var(--w, 0px);
+  height: 2px;
+  border-radius: 2px;
+  transform: translateX(var(--x, 0px));
+  background: linear-gradient(90deg, var(--leaf-500), var(--lime-400) 55%, var(--mango-400));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 460ms var(--ease-out),
+    width 460ms var(--ease-out),
+    opacity 260ms var(--ease-out);
+}
+
+/* ---------- Actions ---------- */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.call,
+.menuBtn {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  color: var(--forest-900);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.14);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.call {
+  display: none;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  min-width: 44px;
+  padding-inline: 12px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans-en);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--ivory-50);
+  background: var(--forest-900);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+/* WhatsApp icon pe chhota lime dot — "online" jaisa, nazar khinchta hai */
+.cta svg {
+  color: var(--lime-400);
+}
+
+.ctaText {
+  display: none;
+}
+
+.call:active,
+.menuBtn:active,
+.cta:active {
+  transform: scale(0.95);
+}
+
+@media (hover: hover) {
+  .call:hover,
+  .menuBtn:hover {
+    background: rgba(10, 26, 18, 0.05);
+    box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.22);
+  }
+  .cta:hover {
+    transform: translateY(-1px);
+    background: #13301f;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 12px 26px -12px rgba(10, 26, 18, 0.6);
+  }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1080px) {
+  .inner {
+    height: 76px;
+  }
+  .nav {
+    display: flex;
+  }
+  .menuBtn {
+    display: none;
+  }
+  .call {
+    display: inline-grid;
+  }
+  .ctaText {
+    display: inline;
+  }
+  .cta {
+    padding-inline: 18px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrap,
+  .bar,
+  .pill,
+  .line {
+    transition: none;
+  }
+}
+
+/* ---------- हिं | EN ----------
+   Chhote phone pe bar mein jagah kam — wahan menu ke andar milta hai */
+.actions .lang {
+  display: none;
+}
+
+@media (min-width: 400px) {
+  .actions .lang {
+    display: grid;
+  }
+}
+
+
+/* "मेरी सूची" ka badge — Plants link pe ginti, phone pe menu button pe hara dot */
+.badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  margin-left: 6px;
+  padding-inline: 5px;
+  border-radius: 99px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: 1px;
+  color: var(--forest-900);
+  background: var(--lime-400);
+}
+
+.menuDot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--leaf-500);
+  box-shadow: 0 0 0 2px #faf8f3;
+}

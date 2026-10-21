@@ -1,0 +1,327 @@
+/* =========================================================
+   सफ़र — default (phone / chhoti oonchai / animation band): upar se neeche
+   Desktop wala horizontal layout neeche ek hi media query mein
+   (StoryTimeline.js ke H_QUERY jaisi hi honi chahiye)
+   ========================================================= */
+
+.section {
+  position: relative;
+  background: var(--forest-900);
+  padding-block: clamp(4rem, 3rem + 5vw, 7rem);
+}
+
+.sticky {
+  position: relative;
+}
+
+.track {
+  padding-inline: var(--gutter);
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+.head {
+  display: grid;
+  gap: 14px;
+  margin-bottom: clamp(2.5rem, 2rem + 3vw, 4rem);
+}
+
+.title {
+  max-width: 12ch;
+}
+
+.line {
+  max-width: 34ch;
+  font-size: var(--fs-lead);
+  color: var(--text-muted);
+}
+
+/* ---------- Tana + list ---------- */
+.rail {
+  position: relative;
+  padding-left: 48px;
+}
+
+.stem {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 13px;
+  width: 2px;
+  border-radius: 2px;
+  background: rgba(245, 241, 232, 0.1);
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, var(--lime-400), #6fbf3a 60%, var(--mango-400));
+  transform-origin: 50% 0;
+  transform: scaleY(0);
+  box-shadow: 0 0 18px rgba(198, 243, 107, 0.45);
+}
+
+.tip {
+  position: absolute;
+  top: -11px;
+  left: -10px;
+  color: var(--lime-400);
+  opacity: 0;
+  transition: opacity 300ms var(--ease-out);
+  filter: drop-shadow(0 0 8px rgba(198, 243, 107, 0.6));
+  will-change: transform;
+}
+
+.list {
+  display: grid;
+  gap: 28px;
+}
+
+.item {
+  position: relative;
+}
+
+/* Saal ki gaanth — tana pahunchte hi do patte phootte hain */
+.node {
+  position: absolute;
+  top: 2px;
+  left: -48px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--forest-900);
+  box-shadow: inset 0 0 0 2px rgba(245, 241, 232, 0.18);
+  transition:
+    box-shadow 500ms var(--ease-out),
+    background-color 500ms var(--ease-out);
+}
+
+.node::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(245, 241, 232, 0.3);
+  transition:
+    background-color 500ms var(--ease-out),
+    transform 500ms var(--ease-out);
+}
+
+.item[data-on="true"] .node {
+  background: var(--forest-800);
+  box-shadow:
+    inset 0 0 0 2px var(--lime-400),
+    0 0 0 6px rgba(198, 243, 107, 0.12);
+}
+
+.item[data-on="true"] .node::after {
+  background: var(--lime-400);
+  transform: scale(1.15);
+}
+
+.sprout {
+  position: absolute;
+  bottom: 60%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  translate: -50% 0;
+  pointer-events: none;
+}
+
+.leafL,
+.leafR {
+  fill: var(--lime-400);
+  transform-box: fill-box;
+  transform: scale(0);
+  transition: transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.leafL {
+  transform-origin: 100% 100%;
+}
+
+.leafR {
+  transform-origin: 0% 100%;
+  transition-delay: 90ms;
+}
+
+.item[data-on="true"] .leafL,
+.item[data-on="true"] .leafR {
+  transform: scale(1);
+}
+
+/* ---------- Card ---------- */
+.card {
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--forest-800);
+  box-shadow: inset 0 0 0 1px rgba(245, 241, 232, 0.06);
+  opacity: 0.38;
+  transform: translateY(14px);
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 900ms var(--ease-out);
+}
+
+.item[data-on="true"] .card {
+  opacity: 1;
+  transform: none;
+}
+
+/* Bina photo wala card (jaise "आज") — khaali na lage, halki sunehri roshni */
+.card:not(:has(.photo)) {
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgba(198, 243, 107, 0.16), transparent 60%),
+    var(--forest-800);
+  box-shadow: inset 0 0 0 1px rgba(198, 243, 107, 0.22);
+}
+
+.card:not(:has(.photo)) .body {
+  padding-block: 26px 30px;
+}
+
+.photo {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--forest-700);
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+  transition: transform 1400ms var(--ease-out);
+}
+
+.item[data-on="true"] .img {
+  transform: none;
+}
+
+.body {
+  display: grid;
+  gap: 6px;
+  padding: 18px 20px 22px;
+}
+
+.yearRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.year {
+  font-family: var(--font-display-en);
+  font-weight: 600;
+  font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.now {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding-inline: 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--forest-900);
+  background: var(--lime-400);
+}
+
+.cardTitle {
+  margin-top: 4px;
+}
+
+.cardLine {
+  color: var(--text-muted);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* =========================================================
+   Desktop: page rukta hai, saal sideways chalte hain
+   ========================================================= */
+@media (min-width: 900px) and (min-height: 640px) and (prefers-reduced-motion: no-preference) {
+  .section {
+    padding-block: 0;
+    height: 300vh; /* JS asli lambai set karta hai — ye sirf pehli jhalak ke liye */
+  }
+
+  .sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .track {
+    display: flex;
+    align-items: center;
+    gap: clamp(3rem, 5vw, 6rem);
+    width: max-content;
+    max-width: none;
+    margin: 0;
+    padding-inline: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+    padding-top: 40px; /* navbar ke neeche thodi saans */
+    will-change: transform;
+  }
+
+  .head {
+    flex: none;
+    width: clamp(320px, 30vw, 440px);
+    margin-bottom: 0;
+  }
+
+  .rail {
+    padding-left: 0;
+  }
+
+  .stem {
+    top: 14px;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 2px;
+  }
+
+  .fill {
+    background: linear-gradient(90deg, var(--lime-400), #6fbf3a 55%, var(--mango-400));
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+  }
+
+  .tip {
+    top: -10px;
+    left: -11px;
+  }
+
+  .list {
+    display: flex;
+    gap: clamp(1.25rem, 2vw, 2rem);
+  }
+
+  .item {
+    flex: none;
+    width: clamp(280px, 24vw, 360px);
+    padding-top: 64px;
+  }
+
+  .node {
+    top: 0;
+    left: 0;
+  }
+
+  .card {
+    transform: translateY(22px);
+  }
+}

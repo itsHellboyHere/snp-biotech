@@ -1,0 +1,107 @@
+/* हिं | EN — chhota liquid-glass pill, navbar ke glass se mel khata */
+.toggle {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 88px;
+  height: 38px;
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  background: rgba(10, 26, 18, 0.05);
+  box-shadow:
+    inset 0 0 0 1px rgba(10, 26, 18, 0.1),
+    inset 0 1px 2px rgba(10, 26, 18, 0.06);
+  flex-shrink: 0;
+}
+
+/* Safed glass thumb — active language ke peeche */
+.thumb {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  border-radius: var(--radius-pill);
+  background: linear-gradient(180deg, #fff, rgba(255, 255, 255, 0.82));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 0 0 1px rgba(79, 138, 91, 0.22),
+    0 4px 12px -6px rgba(10, 26, 18, 0.45);
+  transition: transform 520ms var(--ease-out);
+}
+
+.toggle[data-lang="en"] .thumb {
+  transform: translateX(100%);
+}
+
+.opt {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(10, 26, 18, 0.5);
+  transition: color 320ms var(--ease-out);
+}
+
+.opt[lang="en"] {
+  font-family: var(--font-sans-en);
+  letter-spacing: 0.04em;
+}
+
+.opt[lang="hi"] {
+  font-family: var(--font-sans-hi);
+  font-size: 0.9375rem;
+  padding-top: 1px;
+}
+
+.opt[data-on="true"] {
+  color: var(--forest-900);
+}
+
+@media (hover: hover) {
+  .opt[data-on="false"]:hover {
+    color: var(--forest-900);
+  }
+}
+
+.opt:focus-visible {
+  outline: 2px solid var(--leaf-500);
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thumb {
+    transition: none;
+  }
+}
+
+/* Dark background (footer) pe — halka glass, safed text */
+.toggle[data-tone="dark"] {
+  background: rgba(245, 241, 232, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(245, 241, 232, 0.16);
+}
+
+.toggle[data-tone="dark"] .thumb {
+  background: var(--lime-400);
+  box-shadow: none;
+}
+
+.toggle[data-tone="dark"] .opt {
+  color: rgba(245, 241, 232, 0.6);
+}
+
+.toggle[data-tone="dark"] .opt[data-on="true"] {
+  color: var(--forest-900);
+}
+
+@media (hover: hover) {
+  .toggle[data-tone="dark"] .opt[data-on="false"]:hover {
+    color: var(--ivory-50);
+  }
+}

@@ -1,0 +1,141 @@
+/* Neeche beech mein tairta dark glass bar */
+.dock {
+  position: fixed;
+  left: 50%;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  z-index: 70;
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  translate: -50% 0;
+}
+
+.list,
+.cmp {
+  display: flex;
+  align-items: center;
+  height: 62px;
+  border-radius: var(--radius-pill);
+  color: var(--ivory-50);
+  background: rgba(10, 26, 18, 0.86);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(245, 241, 232, 0.12),
+    0 20px 50px -18px rgba(5, 13, 9, 0.7);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.list:active,
+.cmp:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Tulna ---------- */
+.cmp {
+  gap: 8px;
+  padding: 0 18px;
+}
+
+.cmpN {
+  display: grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  border-radius: 99px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--forest-900);
+  background: var(--lime-400);
+}
+
+.cmpText {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 560px) {
+  .cmpText {
+    display: none;
+  }
+  .cmp {
+    padding: 0 14px;
+  }
+}
+
+/* ---------- Meri suchi ---------- */
+.list {
+  gap: 12px;
+  padding: 0 8px 0 12px;
+  min-width: 0;
+}
+
+.thumbs {
+  display: flex;
+  flex: none;
+}
+
+.thumb {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #efe6d6;
+  box-shadow: 0 0 0 2px rgba(10, 26, 18, 0.9);
+}
+
+.thumb + .thumb {
+  margin-left: -14px;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.3);
+}
+
+.text {
+  display: grid;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.kicker {
+  font-size: 0.75rem;
+  color: rgba(245, 241, 232, 0.6);
+  white-space: nowrap;
+}
+
+.total {
+  font-weight: 700;
+  font-size: 1.0625rem;
+  white-space: nowrap;
+}
+
+.go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 46px;
+  margin-left: 6px;
+  padding-inline: 16px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  color: var(--forest-900);
+  background: var(--lime-400);
+  white-space: nowrap;
+}
+
+@media (max-width: 380px) {
+  .goText {
+    display: none;
+  }
+  .go {
+    padding-inline: 14px;
+  }
+}

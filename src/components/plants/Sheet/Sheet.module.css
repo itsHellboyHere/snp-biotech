@@ -1,0 +1,144 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: var(--forest-900);
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 13, 9, 0.42);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* ---------- Phone: neeche se ---------- */
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: calc(100svh - 28px);
+  background: #fbf9f4;
+  border-radius: 28px 28px 0 0;
+  box-shadow: 0 -20px 60px -20px rgba(5, 13, 9, 0.45);
+  outline: none;
+  overflow: hidden;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.top {
+  flex: none;
+  padding: 10px 16px 6px 20px;
+  touch-action: none; /* yahan se kheencho → sheet neeche */
+  cursor: grab;
+}
+
+.handle {
+  display: block;
+  width: 40px;
+  height: 5px;
+  margin: 0 auto 8px;
+  border-radius: 99px;
+  background: rgba(10, 26, 18, 0.16);
+}
+
+.headRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 40px;
+}
+
+.head {
+  flex: 1;
+  min-width: 0;
+}
+
+.close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--forest-900);
+  background: rgba(10, 26, 18, 0.06);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .close:hover {
+    background: rgba(10, 26, 18, 0.12);
+  }
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 4px 20px 24px;
+}
+
+.footer {
+  flex: none;
+  padding: 12px 20px 14px;
+  background: rgba(251, 249, 244, 0.92);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 -1px 0 rgba(10, 26, 18, 0.08);
+}
+
+/* ---------- Desktop: side panel ---------- */
+.root[data-variant="side"] {
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+.root[data-variant="side"] .panel {
+  width: min(480px, 92vw);
+  max-height: none;
+  height: 100%;
+  border-radius: 28px 0 0 28px;
+  box-shadow: -30px 0 80px -30px rgba(5, 13, 9, 0.5);
+}
+
+.root[data-variant="side"] .top,
+.root[data-variant="modal"] .top {
+  padding: 18px 20px 8px 28px;
+  cursor: default;
+  touch-action: auto;
+}
+
+.root[data-variant="side"] .handle,
+.root[data-variant="modal"] .handle {
+  display: none;
+}
+
+.root[data-variant="side"] .body,
+.root[data-variant="modal"] .body {
+  padding: 4px 28px 28px;
+}
+
+.root[data-variant="side"] .footer,
+.root[data-variant="modal"] .footer {
+  padding: 14px 28px 18px;
+}
+
+/* ---------- Desktop: beech mein bada card ---------- */
+.root[data-variant="modal"] {
+  align-items: center;
+  padding: 24px;
+}
+
+.root[data-variant="modal"] .panel {
+  width: min(1040px, 100%);
+  max-height: min(860px, calc(100svh - 48px));
+  border-radius: 28px;
+  box-shadow: 0 40px 100px -30px rgba(5, 13, 9, 0.55);
+}

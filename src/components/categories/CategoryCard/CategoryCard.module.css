@@ -1,0 +1,251 @@
+/* =========================================================
+   Category card — Apple Store jaisa lamba tile
+   Upar: label · Hindi title · line · chips · 2 buttons
+   Neeche: paudha (transparent cutout), card ke rang mein ghula hua
+   ========================================================= */
+
+.card {
+  --tint: rgba(10, 26, 18, 0.06);
+  --ink: var(--forest-900);
+  --muted: var(--stone-700);
+  --accent: var(--leaf-500);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  min-height: clamp(560px, 80vh, 820px);
+  padding: clamp(2.25rem, 4vw, 3.5rem) clamp(1.25rem, 3vw, 2.5rem) 0;
+  border-radius: 32px;
+  overflow: hidden;
+  isolation: isolate;
+  text-align: center;
+  color: var(--ink);
+}
+
+/* Har category ka apna rang — upar halka, neeche gehra */
+.mango {
+  --accent: #b8650f;
+  background:
+    radial-gradient(70% 45% at 50% 82%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(180deg, #fff6e6 0%, #f8dcab 100%);
+}
+
+.guava {
+  --accent: #3f7a3c;
+  background:
+    radial-gradient(70% 45% at 50% 82%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(180deg, #f1f8ea 0%, #d3e8c2 100%);
+}
+
+.citrus {
+  --accent: #7d8a0f;
+  background:
+    radial-gradient(70% 45% at 50% 82%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(180deg, #fbfae4 0%, #ecefb8 100%);
+}
+
+.more {
+  background:
+    radial-gradient(70% 45% at 50% 85%, rgba(246, 185, 65, 0.22) 0%, rgba(246, 185, 65, 0) 70%),
+    linear-gradient(180deg, #1f3d2b 0%, #0a1a12 100%);
+}
+
+.dark {
+  --ink: var(--ivory-50);
+  --muted: rgba(245, 241, 232, 0.74);
+  --accent: var(--mango-400);
+  --tint: rgba(245, 241, 232, 0.1);
+}
+
+/* ---------- Text ---------- */
+.copy {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  max-width: 30rem;
+}
+
+.label {
+  font-family: var(--font-sans-en);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 1.6rem + 3vw, 4rem);
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.line {
+  font-size: clamp(1rem, 0.94rem + 0.3vw, 1.1875rem);
+  line-height: 1.55;
+  color: var(--muted);
+  text-wrap: balance;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.chips li {
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--tint);
+}
+
+/* ---------- Buttons ---------- */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: var(--space-3);
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+  padding-inline: 20px;
+  border-radius: var(--radius-pill);
+  font-size: 1rem;
+  font-weight: 600;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.primary {
+  color: var(--ivory-50);
+  background: var(--forest-900);
+}
+
+.secondary {
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+
+.primary svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.dark .primary {
+  color: var(--forest-900);
+  background: linear-gradient(135deg, #c6f36b, #f6c75a 60%, #f6b941);
+}
+
+.primary:active,
+.secondary:active {
+  transform: scale(0.96);
+}
+
+@media (hover: hover) {
+  .primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px -12px rgba(10, 26, 18, 0.55);
+  }
+  .primary:hover svg {
+    transform: translateX(3px);
+  }
+  .secondary:hover {
+    color: var(--forest-900);
+    background: var(--ivory-50);
+    box-shadow: inset 0 0 0 1.5px var(--ivory-50);
+  }
+  .card:not(.dark) .secondary:hover {
+    color: var(--ivory-50);
+    background: var(--forest-900);
+    box-shadow: inset 0 0 0 1.5px var(--forest-900);
+  }
+}
+
+/* ---------- Paudha ---------- */
+.stage {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  width: 100%;
+  min-height: 260px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: var(--space-6);
+}
+
+.media {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  will-change: transform;
+}
+
+.img {
+  width: auto;
+  height: auto;
+  max-width: 92%;
+  max-height: clamp(260px, 44vh, 470px);
+  object-fit: contain;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 24px 30px rgba(10, 26, 18, 0.22));
+  transition: transform 800ms var(--ease-out);
+  /* Bag ka neecha hissa card ke kinare pe thoda kata — Apple product shot jaisa */
+  margin-bottom: -4%;
+}
+
+.dark .img {
+  filter: drop-shadow(0 24px 34px rgba(0, 0, 0, 0.5));
+}
+
+@media (hover: hover) {
+  .card:hover .img {
+    transform: scale(1.04);
+  }
+}
+
+@media (max-width: 899px) {
+  .card {
+    min-height: 0;
+    height: clamp(560px, 78svh, 680px);
+    border-radius: 28px;
+  }
+  .img {
+    max-height: clamp(220px, 34svh, 330px);
+  }
+}
+
+/* English card — Sora heading, tight */
+.title:lang(en) {
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+/* Label Hindi mein ho (English page pe) — uppercase/tracking Hindi pe nahi jachta */
+.label:lang(hi) {
+  font-family: var(--font-sans-hi);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}

@@ -1,0 +1,10 @@
+/* "हमारी कहानी" page ka dhaancha — dark aur light sections baari-baari
+   Do light section saath aayein (vaade → tasveerein) to beech ka double gap hatao */
+.page {
+  min-height: 100svh;
+  background: var(--forest-900);
+}
+
+.page > section[data-theme="light"] + section[data-theme="light"] {
+  padding-top: 0;
+}

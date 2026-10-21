@@ -1,0 +1,89 @@
+.wrap {
+  display: grid;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Gol photo — chuni hui pe hari ring (MacBook color dot jaisa) */
+.swatch {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  padding: 3px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.12);
+  transition:
+    box-shadow var(--dur-base) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.swatch[data-on="true"] {
+  box-shadow: inset 0 0 0 2px var(--leaf-500);
+}
+
+.swatch:active {
+  transform: scale(0.94);
+}
+
+.swatchInner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.swatchImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.35); /* phal ko gole mein bada dikhao */
+}
+
+.chip {
+  height: 40px;
+  padding-inline: 16px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--forest-900);
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.14);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.chip[data-on="true"] {
+  color: var(--ivory-50);
+  background: var(--forest-900);
+  box-shadow: none;
+}
+
+@media (hover: hover) {
+  .swatch[data-on="false"]:hover {
+    box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.35);
+  }
+  .chip[data-on="false"]:hover {
+    box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.35);
+  }
+}
+
+.current {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--stone-700);
+}
+
+.kicker {
+  color: var(--stone-500);
+}
+
+.current strong {
+  font-weight: 600;
+  color: var(--forest-900);
+}

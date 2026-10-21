@@ -1,0 +1,22 @@
+.section {
+  padding-block: clamp(2rem, 1.5rem + 3vw, 4rem);
+}
+
+.head {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.head h2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.line {
+  max-width: 46ch;
+  font-size: var(--fs-lead);
+  color: var(--stone-700);
+}

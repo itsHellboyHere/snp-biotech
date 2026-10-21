@@ -1,0 +1,150 @@
+.title {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 400;
+  color: var(--forest-900);
+}
+
+.title:lang(en),
+:lang(en) .title {
+  font-family: var(--font-display-en);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.table {
+  display: grid;
+  gap: 0;
+}
+
+.plants,
+.values {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (min-width: 900px) {
+  .plants,
+  .values {
+    gap: 24px;
+  }
+}
+
+.plants {
+  padding-bottom: 18px;
+}
+
+.plant {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.photo {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #efe6d6;
+}
+
+.img {
+  object-fit: cover;
+  transition: transform 900ms var(--ease-out);
+}
+
+@media (hover: hover) {
+  .photo:hover .img {
+    transform: scale(1.05);
+  }
+}
+
+.remove {
+  position: absolute;
+  z-index: 2;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: var(--forest-900);
+  background: rgba(255, 253, 249, 0.85);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  line-height: 1.2;
+  color: var(--forest-900);
+}
+
+.name:lang(en) {
+  font-family: var(--font-display-en);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.add {
+  container: card / inline-size;
+}
+
+.more {
+  display: grid;
+  place-content: center;
+  gap: 4px;
+  aspect-ratio: 1;
+  padding: 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--forest-900);
+  box-shadow: inset 0 0 0 1.5px rgba(10, 26, 18, 0.16);
+  background: repeating-linear-gradient(135deg, rgba(10, 26, 18, 0.025) 0 10px, transparent 10px 20px);
+}
+
+.more span {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--stone-500);
+}
+
+.row {
+  display: grid;
+  gap: 8px;
+  padding-block: 16px;
+  border-top: 1px solid rgba(10, 26, 18, 0.08);
+}
+
+.label {
+  font-size: 0.8125rem;
+  color: var(--stone-500);
+}
+
+.value {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--forest-900);
+  overflow-wrap: anywhere;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.clear {
+  height: 44px;
+  padding-inline: 18px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  color: var(--forest-900);
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.16);
+}

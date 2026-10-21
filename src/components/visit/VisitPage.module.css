@@ -1,0 +1,4 @@
+.page {
+  min-height: 100svh;
+  background: var(--ivory-50);
+}

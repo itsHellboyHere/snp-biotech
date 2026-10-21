@@ -1,0 +1,83 @@
+.card {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  height: 100%;
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  border-radius: 28px;
+  background: #fffdf9;
+  box-shadow: 0 0 0 1px rgba(10, 26, 18, 0.06);
+}
+
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.title svg {
+  color: var(--leaf-500);
+}
+
+.list {
+  display: grid;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 14px;
+  margin-inline: -14px;
+  border-radius: 14px;
+  border-bottom: 1px solid rgba(10, 26, 18, 0.06);
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.row[data-today="true"] {
+  background: rgba(198, 243, 107, 0.35);
+  border-bottom-color: transparent;
+}
+
+.day {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--stone-700);
+}
+
+.row[data-today="true"] .day {
+  font-weight: 700;
+  color: var(--forest-900);
+}
+
+.todayTag {
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ivory-50);
+  background: var(--forest-900);
+}
+
+.time {
+  font-weight: 600;
+  text-align: right;
+  color: var(--forest-900);
+}
+
+.note {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--stone-500);
+}
+
+.callLink {
+  font-weight: 600;
+  color: var(--leaf-500);
+}

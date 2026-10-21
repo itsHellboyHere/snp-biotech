@@ -1,0 +1,248 @@
+.section {
+  padding-bottom: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.title {
+  margin-top: 8px;
+  max-width: 22ch;
+}
+
+.ghostText {
+  display: inline-block;
+  width: min(420px, 70vw);
+  border-radius: 12px;
+  background: rgba(10, 26, 18, 0.06);
+}
+
+/* ---------- Track: container ki line se shuru, screen ke kinare tak ---------- */
+.track {
+  --edge: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--edge);
+  padding: 4px var(--edge) 18px;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  position: relative;
+  flex: none;
+  width: min(80vw, 380px);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 28px;
+  scroll-snap-align: start;
+  color: var(--ivory-50);
+  background: var(--forest-800);
+  isolation: isolate;
+  box-shadow: 0 30px 60px -40px rgba(10, 26, 18, 0.7);
+  transition: transform 700ms var(--ease-out);
+}
+
+@media (min-width: 640px) {
+  .card {
+    width: min(46vw, 420px);
+  }
+}
+
+.skeleton {
+  background: linear-gradient(100deg, #ece5d6 30%, #f5efe3 50%, #ece5d6 70%) 0 0 / 300% 100%;
+  animation: shimmer 1.4s linear infinite;
+  box-shadow: none;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -150% 0;
+  }
+}
+
+.img {
+  object-fit: cover;
+  z-index: -2;
+  transition: transform 1.4s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .card:hover .img {
+    transform: scale(1.05);
+  }
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(5, 13, 9, 0.35) 0%, rgba(5, 13, 9, 0) 26%, rgba(5, 13, 9, 0) 42%, rgba(5, 13, 9, 0.88) 100%);
+}
+
+.badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ivory-50);
+  background: rgba(10, 26, 18, 0.45);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: inset 0 0 0 1px rgba(245, 241, 232, 0.18);
+}
+
+.badge[data-now="true"] {
+  color: var(--forest-900);
+  background: var(--lime-400);
+  box-shadow: none;
+}
+
+.copy {
+  position: absolute;
+  inset: auto 0 0;
+  display: grid;
+  gap: 4px;
+  padding: 22px;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.name:lang(en) {
+  font-family: var(--font-display-en);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.open {
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+
+.open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.sub {
+  font-size: 0.875rem;
+  color: rgba(245, 241, 232, 0.7);
+}
+
+.line {
+  margin-top: 4px;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: rgba(245, 241, 232, 0.86);
+  text-wrap: pretty;
+}
+
+.action {
+  position: relative;
+  z-index: 2;
+  margin-top: 14px;
+  max-width: 220px;
+}
+
+/* ---------- Dots + play ---------- */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding-inline: 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(10, 26, 18, 0.06);
+}
+
+.dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: rgba(10, 26, 18, 0.22);
+  transition:
+    width 500ms var(--ease-out),
+    background-color 500ms var(--ease-out);
+}
+
+/* Bada tap area, chhota dot */
+.dot::before {
+  content: "";
+  position: absolute;
+  inset: -14px -6px;
+}
+
+.dot[data-active="true"] {
+  width: 44px;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--forest-900);
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.fill[data-running="true"] {
+  animation: progress var(--dur) linear both;
+}
+
+@keyframes progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.play {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--forest-900);
+  background: rgba(10, 26, 18, 0.06);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .play:hover {
+    background: rgba(10, 26, 18, 0.12);
+  }
+}

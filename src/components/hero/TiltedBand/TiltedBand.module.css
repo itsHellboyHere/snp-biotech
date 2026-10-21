@@ -1,0 +1,44 @@
+.root {
+  position: absolute;
+  inset: 0;
+  /* Sirf left-right kaato — kinaron pe phoolti tiles upar-neeche bahar aa sakein (example jaisa) */
+  overflow-x: clip;
+  overflow-y: visible;
+  container-type: size; /* cqw / cqh units isi box ke hisaab se */
+}
+
+/* Stage band se upar-neeche 50% bada — fade mask isi box pe lagta hai,
+   to kinaron pe phoolti tiles kate nahi (mask ke bahar sab chhup jata hai) */
+.stage {
+  position: absolute;
+  inset: -50% 0;
+  pointer-events: none;
+  transition: opacity 900ms var(--ease-out);
+}
+
+.tile {
+  position: absolute;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.slice {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  background: var(--ivory-200);
+  backface-visibility: hidden;
+}
+
+.sliceFirst {
+  border-radius: 14px 0 0 14px;
+}
+
+.sliceLast {
+  border-radius: 0 14px 14px 0;
+}
+
+.face {
+  position: absolute;
+  top: 0;
+}

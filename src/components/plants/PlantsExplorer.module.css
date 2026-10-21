@@ -1,0 +1,33 @@
+.page {
+  min-height: 100svh;
+  background: var(--ivory-50);
+}
+
+.catalogue {
+  position: relative;
+  scroll-margin-top: 64px;
+}
+
+.grid {
+  padding-top: 18px;
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+/* "3 se zyada tulna nahi" — dock ke upar chhota sa sandesh */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(92px + env(safe-area-inset-bottom, 0px));
+  z-index: 110;
+  translate: -50% 0;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--ivory-50);
+  background: rgba(10, 26, 18, 0.9);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 40px -18px rgba(5, 13, 9, 0.7);
+}

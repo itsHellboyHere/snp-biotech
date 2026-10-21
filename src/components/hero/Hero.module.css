@@ -1,0 +1,192 @@
+/* =========================================================
+   Hero — upar heading, beech mein ghoomta 3D band, neeche CTA
+   Phone first: pehli screen pe hi sab kuch, koi scroll lock nahi
+   ========================================================= */
+
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 600px;
+  max-height: 1100px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+  isolation: isolate;
+  background: #faf8f3; /* light, saaf — jaise example */
+  padding-top: calc(env(safe-area-inset-top, 0px) + clamp(5.75rem, 12svh, 8rem)); /* floating navbar ke neeche jagah */
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(1.75rem, 5svh, 3.5rem));
+}
+
+/* Band ke peeche sooraj jaisi halki roshni */
+.glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(50% 34% at 50% 54%, rgba(246, 185, 65, 0.16) 0%, rgba(198, 243, 107, 0.1) 45%, transparent 75%),
+    radial-gradient(120% 60% at 50% 125%, rgba(79, 138, 91, 0.14) 0%, transparent 60%);
+}
+
+/* Band beech ki row mein — tiles row jitni oonchi; kinaron pe phoolti tiles
+   row se bahar (upar-neeche) nikal sakti hain, beech ka text safe rehta hai */
+.bandRow {
+  grid-row: 2;
+  position: relative;
+  z-index: 0;
+  min-height: 0;
+  margin-block: clamp(1.25rem, 4svh, 3rem);
+}
+
+.top,
+.bottom {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: grid;
+  justify-items: center;
+}
+
+.top {
+  grid-row: 1;
+  gap: var(--space-3);
+}
+
+.bottom {
+  grid-row: 3;
+  gap: var(--space-6);
+}
+
+.eyebrow {
+  color: var(--stone-500);
+}
+
+.title {
+  font-size: clamp(2.35rem, 1.3rem + 3.6vw, 4.75rem);
+  display: grid;
+  color: var(--forest-900);
+}
+
+/* ---------- Load animation: har line neeche se upar "nikalti" hai ---------- */
+/* Mask ke andar Hindi ki upar wali maatraayein (ौ ि ी ें) kat jaati thi —
+   isliye upar-neeche zyada padding, aur utna hi negative margin taaki layout na hile */
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.32em 0.14em;
+  margin-block: -0.16em -0.14em; /* upar thoda kam — eyebrow se saans ki jagah bani rahe */
+}
+
+.rise {
+  display: block;
+  animation: rise 1100ms var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.fadeUp {
+  animation: fadeUp 900ms var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes rise {
+  from {
+    /* 105% pe maatraayein mask ke andar jhaank rahi thi — itna neeche ki poori line chhupi rahe */
+    transform: translateY(160%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.line {
+  max-width: 34ch;
+  font-size: clamp(1rem, 0.92rem + 0.4vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--stone-700);
+  text-wrap: balance;
+}
+
+/* ---------- Buttons ---------- */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 26rem;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding-inline: var(--space-4);
+  border-radius: var(--radius-pill);
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+.primary {
+  background: var(--forest-900);
+  color: var(--ivory-50);
+  font-weight: 600;
+}
+
+.secondary {
+  color: var(--forest-900);
+  border: 1px solid rgba(10, 26, 18, 0.18);
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.primary:active,
+.secondary:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) {
+  .primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px -14px rgba(10, 26, 18, 0.55);
+  }
+  .secondary:hover {
+    background: #fff;
+  }
+}
+
+@media (min-width: 720px) {
+  .actions {
+    display: flex;
+    justify-content: center;
+    width: auto;
+  }
+  .primary,
+  .secondary {
+    padding-inline: var(--space-8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .fadeUp {
+    animation: none;
+  }
+}

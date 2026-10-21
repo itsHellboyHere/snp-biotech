@@ -1,0 +1,233 @@
+/* =========================================================
+   पेड़ के छल्ले — dark section ("बाग़" ke baad, usi rang mein)
+   ========================================================= */
+
+.section {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink-950);
+  color: var(--text-strong);
+  padding-block: clamp(3rem, 2rem + 6vw, 8rem) var(--space-section);
+}
+
+/* Phone: text → tana → numbers · Desktop: text + numbers baayein, tana daayein */
+.grid {
+  display: grid;
+  gap: clamp(2.5rem, 2rem + 3vw, 4rem);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    grid-template-areas:
+      "head disc"
+      "stats disc";
+    column-gap: clamp(3rem, 6vw, 7rem);
+    row-gap: var(--space-12);
+  }
+  .head {
+    grid-area: head;
+    align-self: end;
+  }
+  .disc {
+    grid-area: disc;
+  }
+  .stats {
+    grid-area: stats;
+    align-self: start;
+  }
+}
+
+.head {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.eyebrow {
+  color: var(--lime-400);
+}
+
+.title {
+  max-width: 12ch;
+  font-size: var(--fs-h1);
+}
+
+.line {
+  max-width: 38ch;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* ---------- Tana + chhalle ---------- */
+.disc {
+  position: relative;
+  width: min(84vw, 540px);
+  aspect-ratio: 1;
+  justify-self: center;
+}
+
+/* Halki sunehri roshni peeche */
+.disc::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(246, 185, 65, 0.22), rgba(246, 185, 65, 0) 70%);
+  pointer-events: none;
+}
+
+.wood {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow:
+    0 40px 80px -30px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  will-change: transform;
+}
+
+.woodImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.9) brightness(0.82);
+}
+
+/* Lakdi ke upar andhera — chhalle saaf chamken */
+.wood::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(5, 13, 9, 0.15) 0%, rgba(5, 13, 9, 0.45) 100%);
+}
+
+.rings {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.rings circle {
+  fill: none;
+  stroke: var(--ivory-50);
+  stroke-width: 0.42;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  filter: drop-shadow(0 0 1.2px rgba(198, 243, 107, 0.9));
+}
+
+.center {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.big {
+  font-family: var(--font-display-en);
+  font-size: clamp(2.5rem, 1.6rem + 3.5vw, 4.25rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--ivory-50);
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.55);
+}
+
+.small {
+  margin-top: 4px;
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  color: rgba(245, 241, 232, 0.85);
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* Saal wala pill — chhalle ke saath bahar chalta hai */
+.pill {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display-en);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--forest-900);
+  background: var(--lime-400);
+  box-shadow:
+    0 0 0 4px rgba(198, 243, 107, 0.22),
+    0 10px 24px -8px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity 300ms var(--ease-out);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* ---------- Numbers ---------- */
+.stats {
+  display: grid;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.stat {
+  display: grid;
+  gap: 2px;
+  padding-block: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.value {
+  font-family: var(--font-display-en);
+  font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.75rem);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.suffix {
+  font-size: 0.6em;
+  letter-spacing: -0.02em;
+}
+
+/* " एकड़" jaisa Hindi suffix — Hindi font, seedha letter-spacing */
+.suffix:lang(hi) {
+  font-family: var(--font-sans-hi);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.label {
+  font-size: var(--fs-lead);
+  color: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill {
+    transition: none;
+  }
+}

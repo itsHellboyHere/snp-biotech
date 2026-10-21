@@ -1,0 +1,71 @@
+.strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 8px 8px 18px;
+  border-radius: var(--radius-pill);
+  color: var(--ivory-50);
+  background: rgba(245, 241, 232, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(245, 241, 232, 0.12);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    opacity var(--dur-base) var(--ease-out);
+}
+
+.strip[data-ready="false"] {
+  opacity: 0;
+}
+
+.icon {
+  flex: none;
+  color: var(--lime-400);
+}
+
+.text {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: rgba(245, 241, 232, 0.86);
+}
+
+.cta {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding-inline: 16px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--forest-900);
+  background: var(--lime-400);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .strip:hover {
+    background: rgba(245, 241, 232, 0.1);
+  }
+  .strip:hover .cta {
+    transform: translateX(2px);
+  }
+}
+
+/* Phone: text upar, button neeche poori chaudai */
+@media (max-width: 560px) {
+  .strip {
+    flex-wrap: wrap;
+    padding: 14px;
+    border-radius: 22px;
+  }
+  .text {
+    flex-basis: calc(100% - 32px);
+  }
+  .cta {
+    width: 100%;
+    justify-content: center;
+  }
+}

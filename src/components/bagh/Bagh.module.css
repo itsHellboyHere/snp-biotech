@@ -1,0 +1,10 @@
+.section {
+  position: relative;
+  background: var(--ink-950);
+  color: var(--text-strong);
+}
+
+.why {
+  padding-top: clamp(4rem, 2rem + 10vh, 9rem);
+  padding-bottom: var(--space-section);
+}

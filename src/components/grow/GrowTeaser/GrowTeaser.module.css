@@ -1,0 +1,232 @@
+/* =========================================================
+   "बीज से बाग़ तक" teaser — light section, bada dark photo card
+   ========================================================= */
+
+.section {
+  background: #faf8f3;
+  padding-block: var(--space-section);
+}
+
+.card {
+  position: relative;
+  display: block;
+  width: 100%; /* zaroori: warna min-height + aspect-ratio card ko screen se bahar phaila deta hai */
+  overflow: hidden;
+  isolation: isolate;
+  aspect-ratio: 4 / 5;
+  min-height: 460px;
+  border-radius: var(--radius-lg);
+  background: var(--forest-900);
+  color: var(--ivory-50);
+  box-shadow: 0 40px 80px -48px rgba(10, 26, 18, 0.6);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (min-width: 760px) {
+  .card {
+    aspect-ratio: 16 / 9;
+    max-height: 720px;
+  }
+}
+
+/* ---------- Badalti tasveerein ---------- */
+.slides {
+  position: absolute;
+  inset: 0;
+  transition: transform 900ms var(--ease-out);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1100ms var(--ease-in-out);
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.04);
+}
+
+.slide[data-active="true"] {
+  opacity: 1;
+}
+
+/* Halka zoom (Ken Burns) — tasveer zinda lage */
+.card[data-running="true"] .slide[data-active="true"] img {
+  animation: drift calc(var(--interval) + 1200ms) linear both;
+}
+
+@keyframes drift {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+@media (hover: hover) {
+  .card:hover .slides {
+    transform: scale(1.02);
+  }
+}
+
+/* Neeche se andhera — text saaf padhe */
+.shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5, 13, 9, 0.45) 0%, rgba(5, 13, 9, 0) 26%),
+    linear-gradient(0deg, rgba(5, 13, 9, 0.88) 0%, rgba(5, 13, 9, 0.55) 34%, rgba(5, 13, 9, 0) 62%);
+}
+
+/* ---------- Kadam chips (upar) ---------- */
+.steps {
+  position: absolute;
+  top: clamp(1rem, 2.5vw, 1.75rem);
+  left: clamp(1rem, 2.5vw, 1.75rem);
+  right: clamp(1rem, 2.5vw, 1.75rem);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 760px) {
+  .steps {
+    right: auto;
+    width: min(520px, 60%);
+  }
+}
+
+.step {
+  display: grid;
+  gap: 8px;
+}
+
+.stepLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: clamp(0.6875rem, 0.55rem + 0.5vw, 0.8125rem);
+  font-weight: 500;
+  color: rgba(245, 241, 232, 0.55);
+  transition: color 400ms var(--ease-out);
+  white-space: nowrap;
+}
+
+.step[data-state="active"] .stepLabel {
+  color: var(--ivory-50);
+}
+
+.stepTrack {
+  position: relative;
+  height: 3px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: rgba(245, 241, 232, 0.22);
+}
+
+.stepFill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--lime-400), var(--mango-400));
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.step[data-state="done"] .stepFill {
+  transform: scaleX(1);
+}
+
+.card[data-running="true"] .step[data-state="active"] .stepFill {
+  animation: fill var(--interval) linear forwards;
+}
+
+@keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- Text (neeche) ---------- */
+.copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+  padding: clamp(1.25rem, 4vw, 3rem);
+}
+
+.eyebrow {
+  color: rgba(245, 241, 232, 0.7);
+}
+
+.title {
+  color: var(--ivory-50);
+}
+
+.line {
+  max-width: 38ch;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: rgba(245, 241, 232, 0.78);
+  text-wrap: balance;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: var(--space-3);
+  height: 52px;
+  padding-inline: 22px 20px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  color: var(--forest-900);
+  background: var(--ivory-50);
+  box-shadow: 0 10px 30px -14px rgba(0, 0, 0, 0.6);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+.cta svg {
+  transition: transform 400ms var(--ease-out);
+}
+
+@media (hover: hover) {
+  .card:hover .cta {
+    background: #fff;
+  }
+  .card:hover .cta svg {
+    transform: translateX(4px);
+  }
+}
+
+.card:active .cta {
+  transform: scale(0.97);
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--leaf-500);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide,
+  .slides {
+    transition: none;
+  }
+}

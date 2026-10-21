@@ -1,0 +1,39 @@
+.page {
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  background:
+    radial-gradient(60% 40% at 50% 60%, rgba(198, 243, 107, 0.14) 0%, transparent 70%),
+    #faf8f3;
+  padding-block: calc(var(--space-16) + 76px) var(--space-16);
+}
+
+.inner {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.title {
+  color: var(--forest-900);
+}
+
+.line {
+  max-width: 34ch;
+  font-size: var(--fs-lead);
+  color: var(--stone-700);
+}
+
+.back {
+  margin-top: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding-inline: var(--space-6);
+  border-radius: var(--radius-pill);
+  background: var(--forest-900);
+  color: var(--ivory-50);
+  font-family: var(--font-sans-en);
+  font-weight: 600;
+}

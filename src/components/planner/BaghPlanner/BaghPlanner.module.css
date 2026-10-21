@@ -1,0 +1,361 @@
+/* =========================================================
+   बाग़ planner — light section, upar se dikhta khet
+   ========================================================= */
+
+.section {
+  background: #faf8f3;
+  padding-bottom: var(--space-section);
+  color: var(--forest-900);
+}
+
+.head {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  margin-bottom: clamp(1.75rem, 1rem + 2.5vw, 3rem);
+}
+
+.title {
+  max-width: 16ch;
+  color: var(--forest-900);
+  font-size: var(--fs-h1);
+  text-wrap: balance;
+}
+
+.line {
+  max-width: 40ch;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--stone-700);
+}
+
+/* ---------- Chunav ---------- */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4) var(--space-8);
+  margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+}
+
+.group {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.groupLabel {
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--stone-500);
+}
+
+.groupLabel:lang(hi) {
+  letter-spacing: 0.04em;
+  font-size: var(--fs-small);
+}
+
+/* Segmented control — safed thumb slide karta hai */
+.segment {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  background: rgba(10, 26, 18, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.08);
+}
+
+.segmentThumb {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc((100% - 8px) / var(--n));
+  transform: translateX(calc(var(--i) * 100%));
+  border-radius: var(--radius-pill);
+  background: #fff;
+  box-shadow:
+    0 6px 16px -8px rgba(10, 26, 18, 0.35),
+    inset 0 0 0 1px rgba(79, 138, 91, 0.2);
+  transition: transform 520ms var(--ease-out);
+}
+
+.segmentBtn {
+  position: relative;
+  z-index: 1;
+  min-width: 6.5rem;
+  height: 44px;
+  padding-inline: 14px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: rgba(10, 26, 18, 0.55);
+  white-space: nowrap;
+  transition: color 300ms var(--ease-out);
+}
+
+.segmentBtn[data-on="true"] {
+  color: var(--forest-900);
+}
+
+/* Fal chips — chhota pedh + naam */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 16px 0 8px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--forest-900);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.1);
+  transition:
+    background-color 300ms var(--ease-out),
+    color 300ms var(--ease-out),
+    box-shadow 300ms var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.chip[data-on="true"] {
+  color: var(--ivory-50);
+  background: var(--forest-900);
+  box-shadow: 0 10px 22px -12px rgba(10, 26, 18, 0.7);
+}
+
+.chip:active,
+.segmentBtn:active {
+  transform: scale(0.97);
+}
+
+.chipTree {
+  width: 28px;
+  height: 28px;
+}
+
+/* ---------- Khet + panel ---------- */
+.stage {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 960px) {
+  .stage {
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-8);
+  }
+}
+
+/* Khet ki jagah hamesha ek jitni — andar khet chhota/bada hota hai */
+.fieldWrap {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1.6;
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(198, 243, 107, 0.16), rgba(198, 243, 107, 0) 60%),
+    #f1ece0;
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.06);
+  overflow: hidden;
+}
+
+/* Khet — mitti ka rang + halki kataarein, size ke saath smooth bada/chhota */
+.field {
+  position: relative;
+  width: calc(var(--scale) * 92%);
+  aspect-ratio: var(--aspect);
+  max-height: 92%;
+  padding: clamp(6px, 1.2vw, 14px);
+  border-radius: clamp(10px, 1.6vw, 20px);
+  background:
+    repeating-linear-gradient(0deg, rgba(120, 86, 40, 0.07) 0 2px, rgba(120, 86, 40, 0) 2px 22px),
+    linear-gradient(160deg, #e6d6b4, #d9c39a);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.55),
+    inset 0 -18px 40px -24px rgba(90, 60, 20, 0.35),
+    0 24px 40px -28px rgba(70, 50, 20, 0.55);
+  transition:
+    width 700ms var(--ease-out),
+    aspect-ratio 700ms var(--ease-out);
+}
+
+.fieldTag {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, -55%);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--forest-900);
+  background: #fff;
+  box-shadow: 0 6px 16px -8px rgba(10, 26, 18, 0.4);
+  white-space: nowrap;
+}
+
+.trees {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+}
+
+.tree {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  animation: grow 620ms var(--ease-out) both;
+  animation-delay: var(--d);
+  animation-play-state: paused; /* khet dikhne tak ruka */
+}
+
+.fieldWrap[data-seen="true"] .tree {
+  animation-play-state: running;
+}
+
+.tree img {
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 3px rgba(60, 40, 10, 0.35));
+  user-select: none;
+}
+
+@keyframes grow {
+  from {
+    opacity: 0;
+    transform: scale(0.2) rotate(-25deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* ---------- Panel ---------- */
+.panel {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow:
+    0 30px 60px -40px rgba(10, 26, 18, 0.45),
+    inset 0 0 0 1px rgba(10, 26, 18, 0.06);
+}
+
+.about {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--stone-500);
+}
+
+.count {
+  font-family: var(--font-display-en);
+  font-size: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+  color: var(--forest-900);
+}
+
+.what {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--forest-900);
+}
+
+.facts {
+  display: grid;
+  margin: var(--space-4) 0 0;
+  border-top: 1px solid rgba(10, 26, 18, 0.1);
+}
+
+.facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: 12px;
+  border-bottom: 1px solid rgba(10, 26, 18, 0.1);
+}
+
+.facts dt {
+  color: var(--stone-500);
+}
+
+.facts dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: right;
+}
+
+.note {
+  margin-top: var(--space-2);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--stone-500);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: var(--space-4);
+  min-height: 52px;
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  text-align: center;
+  color: var(--ivory-50);
+  background: var(--forest-900);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+.cta svg {
+  color: var(--lime-400);
+  flex-shrink: 0;
+}
+
+@media (hover: hover) {
+  .cta:hover {
+    background: #13301f;
+  }
+}
+
+.cta:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tree {
+    animation: none;
+  }
+  .field,
+  .segmentThumb {
+    transition: none;
+  }
+}

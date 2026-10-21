@@ -1,0 +1,68 @@
+.section {
+  background: #faf8f3;
+  padding-top: var(--space-section);
+  padding-bottom: clamp(3rem, 2rem + 4vw, 6rem);
+  color: var(--forest-900);
+}
+
+.head {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: clamp(2rem, 1.5rem + 3vw, 4rem);
+}
+
+.title {
+  max-width: 16ch; /* title ke apne font size ke hisaab se */
+  color: var(--forest-900);
+  font-size: var(--fs-h1);
+  text-wrap: balance;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(10, 26, 18, 0.12);
+}
+
+/* Phone: number + naam ek line, detail neeche */
+.row {
+  display: grid;
+  grid-template-columns: 3.25rem 1fr;
+  column-gap: var(--space-4);
+  row-gap: var(--space-2);
+  align-items: baseline;
+  padding-block: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  border-bottom: 1px solid rgba(10, 26, 18, 0.12);
+}
+
+.num {
+  font-family: var(--font-display-en);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--leaf-500);
+}
+
+.name {
+  color: var(--forest-900);
+}
+
+.line {
+  grid-column: 2;
+  max-width: 46ch;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--stone-700);
+}
+
+/* Desktop: number | naam | detail */
+@media (min-width: 900px) {
+  .row {
+    grid-template-columns: 5rem minmax(0, 1fr) minmax(0, 1.25fr);
+    column-gap: var(--space-8);
+  }
+  .line {
+    grid-column: 3;
+  }
+}

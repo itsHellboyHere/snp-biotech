@@ -1,0 +1,242 @@
+/* =========================================================
+   Story — light page, dark video card (Apple jaisa)
+   ========================================================= */
+
+.story {
+  position: relative;
+  background: #faf8f3;
+  padding-top: var(--space-section);
+}
+
+/* ---------- Intro heading (normal scroll) ---------- */
+.intro {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  padding-bottom: clamp(1rem, 4svh, 3rem);
+}
+
+.title {
+  color: var(--forest-900);
+}
+
+.lead {
+  max-width: 32ch;
+  font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.375rem);
+  line-height: 1.55;
+  color: var(--stone-700);
+  text-wrap: balance;
+}
+
+/* ---------- Scroll track ---------- */
+.track {
+  position: relative;
+  height: 280vh; /* fallback */
+  height: 280svh; /* phone: chhota aur tez */
+}
+
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+  .track {
+    height: 340vh;
+  }
+}
+
+.track[data-static] {
+  height: 100vh;
+  height: 100svh;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+/* Card — JS clip-path se phailta hai. JS se pehle bhi rounded card dikhe: */
+.card {
+  position: absolute;
+  inset: 0;
+  background: var(--ink-950);
+  clip-path: inset(10svh 14px 12svh 14px round 28px);
+  will-change: clip-path;
+}
+
+@media (min-aspect-ratio: 1/1) {
+  .card {
+    clip-path: inset(10vh 6vw 12vh 6vw round 28px);
+  }
+}
+
+.track[data-static] .card {
+  clip-path: none;
+}
+
+.poster,
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.poster {
+  object-fit: cover;
+}
+
+.canvas {
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out);
+}
+
+.track[data-ready] .canvas {
+  opacity: 1;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(5, 13, 9, 0.9) 0%, rgba(5, 13, 9, 0.55) 30%, rgba(5, 13, 9, 0) 56%);
+}
+
+/* ---------- UI over the card ---------- */
+.ui {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.captions {
+  position: absolute;
+  inset: 0;
+}
+
+.caption {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(6rem, 15svh, 8.5rem));
+  display: grid;
+  justify-items: start;
+  gap: var(--space-2);
+  max-width: 36rem;
+  color: var(--ivory-50);
+}
+
+.caption:not(.first) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.capTitle {
+  font-size: clamp(1.9rem, 1.2rem + 3.4vw, 4rem);
+  color: var(--ivory-50);
+}
+
+.capLine {
+  font-size: clamp(1rem, 0.92rem + 0.4vw, 1.25rem);
+  line-height: 1.55;
+  color: rgba(245, 241, 232, 0.86);
+  max-width: 30rem;
+  text-wrap: pretty;
+}
+
+.capEn {
+  font-family: var(--font-body);
+  letter-spacing: -0.01em;
+  font-size: 0.95rem;
+  color: rgba(245, 241, 232, 0.6);
+}
+
+.cta {
+  margin-top: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding-inline: var(--space-6);
+  border-radius: var(--radius-pill);
+  background: var(--ivory-50);
+  color: var(--forest-900);
+  font-weight: 600;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.cta:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Segment bar (Apple ka chapter progress) ---------- */
+.segments {
+  position: absolute;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(1rem, 3svh, 1.75rem));
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  width: min(calc(100% - 2 * var(--gutter)), 34rem);
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  background: rgba(20, 30, 24, 0.45);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(245, 241, 232, 0.12);
+}
+
+.seg {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  padding: 7px 4px 6px;
+  border-radius: var(--radius-pill);
+  color: rgba(245, 241, 232, 0.55);
+  transition:
+    color var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+.seg[data-active="true"] {
+  color: var(--ivory-50);
+  background: rgba(245, 241, 232, 0.12);
+}
+
+.segLabel {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.segTrack {
+  display: block;
+  width: 70%;
+  height: 2px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: rgba(245, 241, 232, 0.2);
+}
+
+.segFill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--grad-text);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+@media (hover: hover) {
+  .seg:hover {
+    color: var(--ivory-50);
+  }
+}
+
+@media (min-width: 720px) {
+  .segLabel {
+    font-size: 0.875rem;
+  }
+}

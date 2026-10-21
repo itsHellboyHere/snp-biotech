@@ -1,0 +1,319 @@
+/* =========================================================
+   12 महीने का पहिया — light section
+   ========================================================= */
+
+.section {
+  background: #f5f1e8;
+  color: var(--forest-900);
+  padding-block: var(--space-section);
+}
+
+/* Desktop: poora section ek screen mein (pahiya + heading + chunav + card) */
+@media (min-width: 960px) {
+  .section {
+    padding-block: clamp(4rem, 9vh, 7rem);
+  }
+}
+
+/* Phone: heading → pahiya → jaankari · Desktop: pahiya baayein, baaki daayein */
+.grid {
+  display: grid;
+  gap: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "wheel head"
+      "wheel info";
+    column-gap: clamp(3rem, 6vw, 7rem);
+    row-gap: var(--space-6);
+  }
+  .head {
+    grid-area: head;
+    align-self: end;
+  }
+  .wheelWrap {
+    grid-area: wheel;
+  }
+  .info {
+    grid-area: info;
+    align-self: start;
+  }
+}
+
+.head {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.title {
+  max-width: 14ch;
+  color: var(--forest-900);
+  font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.75rem);
+  text-wrap: balance;
+}
+
+.line {
+  max-width: 42ch;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--stone-700);
+}
+
+/* ---------- Pahiya ---------- */
+.wheelWrap {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+}
+
+.wheel {
+  /* screen ki chaudai aur oonchai dono ke hisaab se — kabhi kate nahi */
+  width: min(88vw, 520px, 66svh);
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 30px 40px rgba(10, 26, 18, 0.12));
+}
+
+.ring {
+  transform-origin: 200px 200px;
+  transition: transform 1200ms var(--ease-out);
+}
+
+.seg {
+  fill: #fff;
+  stroke: rgba(10, 26, 18, 0.06);
+  stroke-width: 1;
+  transition:
+    fill 500ms var(--ease-out),
+    opacity 500ms var(--ease-out);
+}
+
+.seg[data-now="true"] {
+  stroke: var(--forest-900);
+  stroke-width: 2.5;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: rgba(10, 26, 18, 0.5);
+  transition:
+    fill 400ms var(--ease-out),
+    transform 1200ms var(--ease-out);
+  pointer-events: none;
+}
+
+.label[data-on="true"] {
+  fill: var(--forest-900);
+}
+
+.pointer {
+  fill: var(--forest-900);
+}
+
+.coinRing {
+  fill: #fff;
+  stroke-width: 4;
+  transition: stroke 500ms var(--ease-out);
+}
+
+.coin {
+  animation: coin 600ms var(--ease-out) both;
+  transform-origin: 200px 200px;
+}
+
+@keyframes coin {
+  from {
+    opacity: 0;
+    transform: scale(0.85) rotate(-12deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.nowTag {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--ivory-50);
+  background: var(--forest-900);
+}
+
+/* ---------- Jaankari ---------- */
+.info {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.card {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+  padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow:
+    0 30px 60px -40px rgba(10, 26, 18, 0.45),
+    inset 0 0 0 1px rgba(10, 26, 18, 0.06);
+}
+
+.fruitName {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+  line-height: 1.2;
+}
+
+.fruitName:lang(en) {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.best {
+  font-size: var(--fs-lead);
+  font-weight: 600;
+}
+
+.best span {
+  font-weight: 500;
+  color: var(--stone-500);
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--forest-900);
+  background: rgba(10, 26, 18, 0.06);
+}
+
+.status[data-now="true"] {
+  background: var(--lime-400);
+}
+
+.ahead {
+  color: var(--stone-700);
+  line-height: 1.5;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: var(--space-2);
+  min-height: 50px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  color: var(--ivory-50);
+  background: var(--forest-900);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.cta svg {
+  color: var(--lime-400);
+}
+
+.cta:active {
+  transform: scale(0.97);
+}
+
+.pick {
+  margin-bottom: calc(var(--space-2) * -1);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--stone-500);
+}
+
+.pick:lang(hi) {
+  font-size: var(--fs-small);
+  letter-spacing: 0.04em;
+}
+
+/* Fal ke sikke */
+/* Phone: 4×2 · Desktop: 8 ek line mein */
+.fruits {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+@media (min-width: 960px) {
+  .fruits {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 6px;
+  }
+  /* .fruits ke saath — neeche wale base rules se jeete */
+  .fruits .fruitBtn {
+    padding: 8px 2px 6px;
+    font-size: 0.8125rem;
+  }
+  .fruits .fruitBtn img {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.fruitBtn {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 10px 4px 8px;
+  border-radius: 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--forest-900);
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 0 0 1px rgba(10, 26, 18, 0.06);
+  transition:
+    background-color 300ms var(--ease-out),
+    box-shadow 300ms var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.fruitBtn img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 400ms var(--ease-out);
+}
+
+.fruitBtn[data-on="true"] {
+  background: #fff;
+  box-shadow:
+    inset 0 0 0 2px var(--c),
+    0 14px 28px -18px rgba(10, 26, 18, 0.5);
+}
+
+.fruitBtn[data-on="true"] img {
+  transform: scale(1.08);
+}
+
+.fruitBtn:active {
+  transform: scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring,
+  .label,
+  .seg {
+    transition: none;
+  }
+  .coin {
+    animation: none;
+  }
+}

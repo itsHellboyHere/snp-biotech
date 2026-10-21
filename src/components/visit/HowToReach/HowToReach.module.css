@@ -1,0 +1,66 @@
+.card {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  height: 100%;
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  border-radius: 28px;
+  background: #fffdf9;
+  box-shadow: 0 0 0 1px rgba(10, 26, 18, 0.06);
+}
+
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.steps {
+  position: relative;
+  display: grid;
+  gap: 6px;
+}
+
+/* Kadmon ko jodti patli line */
+.steps::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 18px;
+  bottom: 18px;
+  width: 2px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(180deg, rgba(79, 138, 91, 0.45) 0 4px, transparent 4px 9px);
+}
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 32px 24px 1fr;
+  align-items: center;
+  gap: 12px;
+  padding-block: 10px;
+}
+
+.num {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--forest-900);
+  background: var(--lime-400);
+  box-shadow: 0 0 0 5px #fffdf9;
+}
+
+.icon {
+  color: var(--leaf-500);
+}
+
+.text {
+  line-height: 1.5;
+  color: var(--forest-900);
+}
