@@ -1,17 +1,24 @@
 // =========================================================
-// "Kya ye data live site pe dikhe?" — poori website ka ek hi niyam
+// "Kya ye data site pe dikhe?" — poori website ka ek hi niyam
 //
-// Har placeholder block pe `confirmed: false` hota hai.
-//   - Dev (npm run dev) mein sab dikhta hai, "नमूना डेटा" tag ke saath → design check ho sake
-//   - Live site (production) pe SIRF wahi dikhta hai jo client ne confirm kiya (confirmed: true)
-// Isse naqli photo / naam / saal / testimonial kabhi galti se live nahi jaate.
+// Abhi (client ka data aane tak): SHOW_PLACEHOLDERS = true → sab kuch live site pe bhi dikhta hai,
+// namoona (confirmed: false) data bhi. "नमूना डेटा" tag sirf dev (localhost) mein dikhta hai.
+// Client ka asli data aate hi us block pe `confirmed: true` karo.
+// Sab asli ho jaaye (ya naqli chhupana ho) → SHOW_PLACEHOLDERS = false
+// Google (JSON-LD schema) mein hamesha SIRF confirmed data jaata hai — isConfirmed.
 // =========================================================
 
+export const SHOW_PLACEHOLDERS = true;
+
 export function isLive(block) {
-  return Boolean(block?.confirmed) || process.env.NODE_ENV !== "production";
+  return Boolean(block?.confirmed) || SHOW_PLACEHOLDERS;
 }
 
-// Google (JSON-LD) ke liye aur bhi sakht: sirf confirmed — dev mein bhi naqli data schema mein na jaaye
+// "नमूना डेटा" tag — sirf dev mein, taaki yaad rahe kya badalna hai
+export function isSample(block) {
+  return !block?.confirmed && process.env.NODE_ENV !== "production";
+}
+
 export function isConfirmed(block) {
   return block?.confirmed === true;
 }

@@ -3,8 +3,8 @@ export const site = {
   name: "SNP Biotech",
   url: "https://snpbiotech.in", // TODO: asli domain confirm (SEO links isi se bante hain)
   established: 2016, // TODO: exact saal confirm
-  whatsapp: "910000000000", // TODO: WhatsApp number, bina "+" ke
-  phone: "+910000000000", // TODO: calling number
+  whatsapp: "919568555404", // WhatsApp number, bina "+" ke (91 = India)
+  phone: "+919568555404", // calling number
   // TODO: pura pata (gaanv / tehsil / zila) — footer + Visit page pe dikhta hai
   address: { hi: "उत्तर प्रदेश", en: "Uttar Pradesh, India" },
   mapsUrl: null, // TODO: Google Maps ka "Share → Copy link"
