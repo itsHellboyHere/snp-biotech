@@ -24,11 +24,12 @@ export default function CategoryCard({ item }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
+      const phone = window.matchMedia("(max-width: 899px)").matches;
       gsap.fromTo(
         mediaRef.current,
-        { yPercent: 10 },
+        { yPercent: phone ? 4 : 10 },
         {
-          yPercent: -3,
+          yPercent: phone ? -2 : -3,
           ease: "none",
           scrollTrigger: { trigger: cardRef.current, start: "top bottom", end: "bottom top", scrub: 0.6 },
         }

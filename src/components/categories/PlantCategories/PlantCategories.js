@@ -58,7 +58,17 @@ export default function PlantCategories() {
         </LocaleLink>
       </div>
 
-      <div ref={trackRef} className={styles.track}>
+      {/* Animation poori patti pe trigger hoti hai (har card pe alag nahi) — phone pe
+          agla card side mein screen se bahar hota hai, alag trigger pe wo kabhi "dikhta"
+          hi nahi tha aur jhalak (peek) khaali reh jaati thi */}
+      <motion.div
+        ref={trackRef}
+        className={styles.track}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.15 }}
+        variants={{ show: { transition: { staggerChildren: 0.08 } } }}
+      >
         {CATEGORIES.map((item, i) => (
           <motion.div
             key={item.id}
@@ -67,15 +77,15 @@ export default function PlantCategories() {
             }}
             data-index={i}
             className={styles.cell}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.8, ease: EASE, delay: (i % 2) * 0.1 }}
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE } },
+            }}
           >
             <CategoryCard item={item} />
           </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       <div className={styles.dots} role="tablist" aria-label={t(CATEGORY_INTRO.dotsLabel)}>
         {CATEGORIES.map((item, i) => (

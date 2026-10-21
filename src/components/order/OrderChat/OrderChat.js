@@ -4,14 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { MessageCircle, CheckCheck, Mic, Plus } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { whatsappLink, WA_TEXT } from "@/lib/site";
+import { useMedia } from "@/components/plants/hooks";
 import { ORDER, STEPS, MESSAGES } from "../orderData";
 import styles from "./OrderChat.module.css";
 
 /* =========================================================
    ऑर्डर कैसे करें — phone pe WhatsApp chat jo dikhte hi
    "khud likhi jaati hai" (SNP ke jawab se pehle typing…).
-   Baayein 3 kadam chat ke saath-saath jalte hain.
-   Screen se jaake wapas aao to dobara chalti hai.
+   Desktop: baayein 3 kadam chat ke saath-saath jalte hain (dono ek saath dikhte hain).
+   Phone: kadam chat ke UPAR hain (chat abhi screen pe nahi hoti) → isliye wahan
+     kadam scroll se jalte hain — jo kadam screen ke beech aaye, wo roshan.
+   Screen se jaake wapas aao to chat dobara chalti hai.
    ========================================================= */
 
 const GAP_ME = 900; // grahak ka message
@@ -21,6 +24,9 @@ const TYPING = 1100; // "typing…" kitni der
 export default function OrderChat() {
   const { t } = useLang();
   const phoneRef = useRef(null);
+  const stepRefs = useRef([]);
+  const isPhone = useMedia("(max-width: 959.98px)"); // CSS ka 960px wala break
+  const [scrollStep, setScrollStep] = useState(-1);
   const [shown, setShown] = useState(0);
   const [typing, setTyping] = useState(false);
   const [round, setRound] = useState(0); // har baar dikhne pe naya round
@@ -42,6 +48,20 @@ export default function OrderChat() {
     io.observe(phoneRef.current);
     return () => io.disconnect();
   }, []);
+
+  // Phone: jo kadam screen ke beech wali patti (40%–55%) mein aaye, wahi "abhi wala"
+  useEffect(() => {
+    if (!isPhone) return;
+    const els = stepRefs.current.filter(Boolean);
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) setScrollStep(Number(e.target.dataset.index));
+      },
+      { rootMargin: "-40% 0px -45% 0px" }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [isPhone]);
 
   // Round odd = chal rahi · even = ruki/reset
   useEffect(() => {
@@ -77,7 +97,8 @@ export default function OrderChat() {
   }, [round]);
 
   const lastStep = shown > 0 ? MESSAGES[shown - 1].step : -1;
-  const activeStep = typing && shown < MESSAGES.length ? MESSAGES[shown].step : lastStep;
+  const chatStep = typing && shown < MESSAGES.length ? MESSAGES[shown].step : lastStep;
+  const activeStep = isPhone ? scrollStep : chatStep;
 
   return (
     <section className={styles.section} aria-labelledby="order-title">
@@ -93,6 +114,10 @@ export default function OrderChat() {
             {STEPS.map((s, i) => (
               <li
                 key={i}
+                ref={(el) => {
+                  stepRefs.current[i] = el;
+                }}
+                data-index={i}
                 className={styles.step}
                 data-state={i < activeStep ? "done" : i === activeStep ? "active" : "next"}
               >

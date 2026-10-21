@@ -223,14 +223,24 @@
   }
 }
 
+/* Phone: card ki lambai = text + paudha (pehle fixed 78svh tha → beech mein bada khaali hissa) */
 @media (max-width: 899px) {
   .card {
     min-height: 0;
-    height: clamp(560px, 78svh, 680px);
+    height: 100%;
+    padding-top: 2rem;
     border-radius: 28px;
   }
+  .stage {
+    flex: 1 0 auto;
+    min-height: 0;
+    height: clamp(250px, 38svh, 340px);
+    margin-top: var(--space-4);
+  }
   .img {
-    max-height: clamp(220px, 34svh, 330px);
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: -2%;
   }
 }
 
