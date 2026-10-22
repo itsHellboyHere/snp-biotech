@@ -1,0 +1,152 @@
+/* --p (0→1) = load progress · --i = chhalle ka number (0 = sabse andar)
+   chhalla i tab dikhta hai jab p * n > i  (clamp se 0→1 naram badlaav) */
+.wrap {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--ivory-50);
+  background:
+    radial-gradient(60% 50% at 50% 50%, rgba(198, 243, 107, 0.07), transparent 70%),
+    var(--forest-900);
+}
+
+.wrap[data-phase="exit"] {
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out) 250ms;
+}
+
+/* ---------- Chhalle ---------- */
+.rings {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+}
+
+.rings span {
+  --on: clamp(0, calc(var(--p) * var(--n) - var(--i)), 1);
+  --size: calc(108px + var(--i) * clamp(22px, 5.2vw, 40px));
+  position: absolute;
+  left: calc(var(--size) / -2);
+  top: calc(var(--size) / -2);
+  width: var(--size);
+  height: var(--size);
+  border: 1px solid rgba(198, 243, 107, calc(0.55 - var(--i) * 0.035));
+  opacity: var(--on);
+  transform: scale(calc(0.86 + var(--on) * 0.14)) rotate(calc(var(--i) * 17deg));
+  /* asli lakdi ke chhalle bilkul gol nahi hote — halka sa tedha */
+  border-radius: 50% 48% 52% 49% / 49% 52% 48% 51%;
+}
+
+.wrap[data-phase="done"] .rings span {
+  border-color: rgba(198, 243, 107, 0.7);
+  box-shadow: 0 0 14px rgba(198, 243, 107, 0.25);
+  transition:
+    border-color 300ms var(--ease-out) calc(var(--i) * 25ms),
+    box-shadow 300ms var(--ease-out) calc(var(--i) * 25ms);
+}
+
+/* Exit: andar wale pehle, tezi se bahar udte (camera chhallon ke beech se guzarta hai) */
+.wrap[data-phase="exit"] .rings span {
+  transform: scale(calc(5 + var(--i) * 0.4)) rotate(calc(var(--i) * 17deg));
+  opacity: 0;
+  transition:
+    transform 1000ms cubic-bezier(0.7, 0, 0.2, 1) calc(var(--i) * 18ms),
+    opacity 700ms var(--ease-out) calc(250ms + var(--i) * 18ms);
+}
+
+/* ---------- Beech: saal → patte ---------- */
+.center {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 108px;
+  height: 108px;
+}
+
+.year {
+  font-family: var(--font-display-en);
+  font-weight: 600;
+  font-size: 1.75rem;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--ivory-50);
+  transition:
+    opacity 300ms var(--ease-out),
+    transform 400ms var(--ease-out);
+}
+
+.unit {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  white-space: nowrap;
+  font-size: 0.8125rem;
+  color: rgba(245, 241, 232, 0.5);
+  transition: opacity 300ms var(--ease-out);
+}
+
+.mark {
+  position: absolute;
+  inset: 22px;
+  width: calc(100% - 44px);
+  height: auto;
+  margin: auto;
+  opacity: 0;
+  transform: scale(0.3) rotate(-20deg);
+}
+
+.wrap:not([data-phase="loading"]) .year,
+.wrap:not([data-phase="loading"]) .unit {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.wrap:not([data-phase="loading"]) .mark {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 400ms var(--ease-out) 120ms,
+    transform 800ms cubic-bezier(0.34, 1.56, 0.64, 1) 120ms;
+}
+
+.wrap[data-phase="exit"] .mark {
+  transform: scale(1.6);
+  opacity: 0;
+  transition:
+    transform 900ms cubic-bezier(0.7, 0, 0.2, 1),
+    opacity 500ms var(--ease-out) 250ms;
+}
+
+/* ---------- Neeche tagline ---------- */
+.tag {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(36px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  font-size: 0.875rem;
+  color: rgba(245, 241, 232, 0.5);
+  opacity: calc(0.3 + var(--p) * 0.7);
+}
+
+.tag span {
+  font-family: var(--font-display-en);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--ivory-50);
+}
+
+.wrap[data-phase="exit"] .tag {
+  opacity: 0;
+  transition: opacity 300ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrap[data-phase="exit"] .rings span,
+  .wrap[data-phase="exit"] .mark {
+    transform: none;
+  }
+}

@@ -1,0 +1,194 @@
+/* Light parda · --p = progress · data-phase = loading | done | exit
+   Shabd ka chakkar: har shabd S=0.45s pe aata hai, T=0.225s mein andar/bahar khisakta hai */
+.wrap {
+  --S: 0.45s;
+  --T: 0.225s;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: var(--forest-900);
+  background:
+    radial-gradient(60% 45% at 50% 55%, rgba(198, 243, 107, 0.22), transparent 70%),
+    var(--ivory-50);
+  border-radius: 0;
+}
+
+.inner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding:
+    calc(22px + env(safe-area-inset-top, 0px)) var(--gutter)
+    calc(26px + env(safe-area-inset-bottom, 0px));
+}
+
+/* ---------- Upar ---------- */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logo {
+  height: 44px;
+  width: auto;
+  color: #183d2b;
+}
+
+.since {
+  font-size: 0.875rem;
+  color: var(--stone-500);
+  text-align: right;
+}
+
+/* ---------- Beech: ghoomte shabd ---------- */
+.words {
+  display: grid;
+  place-items: center;
+}
+
+.word {
+  grid-area: 1 / 1;
+  display: block;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 1.5rem + 13vw, 12rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.word:lang(en),
+:lang(en) .word {
+  font-family: var(--font-display-en);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+}
+
+/* Padding andar wale span pe — taaki khisakte waqt poora shabd (maatraon samet)
+   dabbe ke bahar chala jaaye, agla shabd neeche se jhaanke nahi */
+.word > span {
+  display: block;
+  padding-block: 0.16em; /* Hindi maatraayein na katein */
+  transform: translateY(110%);
+  animation: roll calc(var(--S) + var(--T)) cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation-delay: calc(var(--i) * var(--S) + 0.15s);
+}
+
+.word[data-last="true"] > span {
+  animation-name: settle;
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes roll {
+  0% {
+    transform: translateY(110%);
+  }
+  33.3%,
+  66.7% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-110%);
+  }
+}
+
+@keyframes settle {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* done: aakhri shabd hara-sunehra */
+.wrap:not([data-phase="loading"]) .word[data-last="true"] > span {
+  color: transparent;
+  background: linear-gradient(100deg, #3b7d2a 0%, var(--leaf-500) 45%, #b8790f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* ---------- Neeche: label + bada % ---------- */
+.bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.label {
+  padding-bottom: 0.6em;
+  font-size: 0.9375rem;
+  color: var(--stone-700);
+}
+
+.pct {
+  font-family: var(--font-display-en);
+  font-weight: 500;
+  font-size: clamp(3rem, 1.5rem + 7vw, 7.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--forest-900);
+}
+
+.pct small {
+  margin-left: 0.04em;
+  font-size: 0.35em;
+  letter-spacing: 0;
+  color: var(--stone-500);
+  vertical-align: top;
+}
+
+/* Sabse neeche patli line */
+.bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--leaf-500), var(--lime-400) 60%, var(--mango-400));
+  transform-origin: 0 50%;
+  transform: scaleX(var(--p));
+}
+
+/* ---------- Exit: parda upar, neeche ka kinara gol ---------- */
+.wrap[data-phase="exit"] {
+  transform: translateY(-105%);
+  border-radius: 0 0 50% 50% / 0 0 22vh 22vh;
+  transition:
+    transform 1000ms cubic-bezier(0.76, 0, 0.24, 1),
+    border-radius 1000ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.wrap[data-phase="exit"] .inner {
+  transform: translateY(-12vh);
+  opacity: 0;
+  transition:
+    transform 900ms cubic-bezier(0.76, 0, 0.24, 1),
+    opacity 500ms var(--ease-out);
+}
+
+.wrap[data-phase="exit"] .bar {
+  opacity: 0;
+  transition: opacity 200ms linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word > span {
+    animation: none;
+    transform: none;
+  }
+  .word:not([data-last="true"]) {
+    display: none;
+  }
+  .wrap[data-phase="exit"] {
+    transform: none;
+    opacity: 0;
+    transition: opacity 300ms linear;
+  }
+}

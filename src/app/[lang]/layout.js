@@ -5,6 +5,8 @@ import "../globals.css";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import Navbar from "@/components/nav/Navbar/Navbar";
 import Footer from "@/components/footer/Footer/Footer";
+import Loader from "@/components/loader/Loader";
+import LoaderBoot from "@/components/loader/LoaderBoot";
 import { LangProvider } from "@/i18n/LangProvider";
 import { LOCALES, hasLocale } from "@/i18n/config";
 import { pageMetadata } from "@/i18n/seo";
@@ -86,10 +88,15 @@ export default async function RootLayout({ children, params }) {
   if (!hasLocale(lang)) notFound();
 
   return (
-    <html lang={lang} id="top" className={fontVariables}>
+    // suppressHydrationWarning: LoaderBoot script <html> pe data-loader lagata hai (React se pehle)
+    <html lang={lang} id="top" className={fontVariables} suppressHydrationWarning>
       <body>
+        {/* Sabse pehle: dobara aane pe loader ki jhalak bhi na dikhe */}
+        <LoaderBoot />
         <LangProvider lang={lang}>
           <SmoothScroll />
+          {/* Site khulne wala loader — kaunsa: components/loader/loaderConfig.js (ACTIVE) */}
+          <Loader />
           <Navbar />
           {children}
           <Footer />

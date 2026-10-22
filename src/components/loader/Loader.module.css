@@ -1,0 +1,24 @@
+/* Loader ki bahari parat — poori screen, sab ke upar (navbar 80, lightbox 200) */
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.root[data-phase="exit"] {
+  pointer-events: none; /* site dikhne lage to click ho sake */
+}
+
+/* ONCE_PER_TAB: is tab mein pehle dekh liya → LoaderBoot ne <html data-loader="skip"> lagaya,
+   JS aane se pehle hi chhupa do (koi jhalak nahi) */
+:global(html[data-loader="skip"]) .root {
+  display: none;
+}
+
+/* Loader chalte waqt page scroll band */
+:global(html):has(.root[data-phase="loading"]),
+:global(html):has(.root[data-phase="done"]) {
+  overflow: hidden;
+}
