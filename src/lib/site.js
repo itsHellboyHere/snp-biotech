@@ -1,7 +1,24 @@
+// =========================================================
+// Website ka pura pata (share photo / OG, sitemap, Google ke links isi se bante hain)
+// Kram: NEXT_PUBLIC_SITE_URL → DOMAIN (neeche) → Vercel ka apna pata → localhost
+// Asli domain (jaise snpbiotech.in) live ho jaaye → DOMAIN mein likh do, bas.
+// Tab tak Vercel wala pata — taaki WhatsApp pe link share karne pe photo sahi aaye.
+// =========================================================
+const DOMAIN = null; // TODO: client ka domain, jaise "https://snpbiotech.in"
+
+function siteUrl() {
+  const clean = (u) => u.replace(/\/+$/, "");
+  if (process.env.NEXT_PUBLIC_SITE_URL) return clean(process.env.NEXT_PUBLIC_SITE_URL);
+  if (DOMAIN) return clean(DOMAIN);
+  // Vercel khud deta hai (production ka pata, jaise snp-biotech.vercel.app)
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  return "http://localhost:3000";
+}
+
 // Business details ek jagah — client se confirm hote hi yahin update karo
 export const site = {
   name: "SNP Biotech",
-  url: "https://snpbiotech.in", // TODO: asli domain confirm (SEO links isi se bante hain)
+  url: siteUrl(), // sirf server pe use hota hai (metadata, sitemap, JSON-LD, email)
   established: 2016, // TODO: exact saal confirm
   whatsapp: "919568555404", // WhatsApp number, bina "+" ke (91 = India)
   phone: "+919568555404", // calling number
