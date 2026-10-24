@@ -1,0 +1,187 @@
+{
+  "cloud": "k3r9zeyj",
+  "assets": {
+    "/bagh/bagh-desktop.mp4": {
+      "id": "snp-biotech/bagh/bagh-desktop",
+      "v": 1792815552,
+      "type": "video",
+      "hash": "6ef25b1360232e169ab5b08dabfe5d78",
+      "cloud": "k3r9zeyj"
+    },
+    "/bagh/bagh-mobile.mp4": {
+      "id": "snp-biotech/bagh/bagh-mobile",
+      "v": 1792815554,
+      "type": "video",
+      "hash": "2793063e6fc1d43cdaec7c6c661f1827",
+      "cloud": "k3r9zeyj"
+    },
+    "/bagh/poster-desktop.webp": {
+      "id": "snp-biotech/bagh/poster-desktop",
+      "v": 1792815555,
+      "type": "image",
+      "hash": "017c046b93c8a8a1a46dca379e54cffe",
+      "cloud": "k3r9zeyj"
+    },
+    "/bagh/poster-mobile.webp": {
+      "id": "snp-biotech/bagh/poster-mobile",
+      "v": 1792815556,
+      "type": "image",
+      "hash": "d95877d409fe5c419a3965a7b87b8b8e",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/mango-dasheri.webp": {
+      "id": "snp-biotech/plants/mango-dasheri",
+      "v": 1792815557,
+      "type": "image",
+      "hash": "739cad0ce33397142f257efd4ff71442",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/mango-langra.webp": {
+      "id": "snp-biotech/plants/mango-langra",
+      "v": 1792815557,
+      "type": "image",
+      "hash": "0287e8cdec664f56ad457828b08b7dc0",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/mango-chausa.webp": {
+      "id": "snp-biotech/plants/mango-chausa",
+      "v": 1792815558,
+      "type": "image",
+      "hash": "ef08aee045bdc0d180fad57238ee9167",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/mango-amrapali.webp": {
+      "id": "snp-biotech/plants/mango-amrapali",
+      "v": 1792815559,
+      "type": "image",
+      "hash": "f368370aae5f754d4c82de14bfafecd7",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/guava-taiwan.webp": {
+      "id": "snp-biotech/plants/guava-taiwan",
+      "v": 1792815560,
+      "type": "image",
+      "hash": "c18007b21bbc5f5e3007c8f9e7d4d8ee",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/guava-lalit.webp": {
+      "id": "snp-biotech/plants/guava-lalit",
+      "v": 1792815560,
+      "type": "image",
+      "hash": "4cc1792fce8ce81591e83fbc004d6ab4",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/guava-safeda.webp": {
+      "id": "snp-biotech/plants/guava-safeda",
+      "v": 1792815561,
+      "type": "image",
+      "hash": "86cc6d3cf9c4414985f5b3fd2eb9e903",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/litchi.webp": {
+      "id": "snp-biotech/plants/litchi",
+      "v": 1792815562,
+      "type": "image",
+      "hash": "645e0e70a4241c9662844fab16333702",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/chikoo.webp": {
+      "id": "snp-biotech/plants/chikoo",
+      "v": 1792815562,
+      "type": "image",
+      "hash": "33fde2620c309b51b59fbe845b7e6e10",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/pear.webp": {
+      "id": "snp-biotech/plants/pear",
+      "v": 1792815563,
+      "type": "image",
+      "hash": "076c96f3b7e3c2e8dd792a8d14b0ac69",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/amla.webp": {
+      "id": "snp-biotech/plants/amla",
+      "v": 1792815564,
+      "type": "image",
+      "hash": "cb91377b25d825fb5cf3ba7068795f87",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/kinnow.webp": {
+      "id": "snp-biotech/plants/kinnow",
+      "v": 1792815565,
+      "type": "image",
+      "hash": "31cb51d14644a16a7d0b98e8a28c3d0c",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/mosambi.webp": {
+      "id": "snp-biotech/plants/mosambi",
+      "v": 1792815565,
+      "type": "image",
+      "hash": "0544b98aaf249e153e0ed4e0231301ce",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/lemon.webp": {
+      "id": "snp-biotech/plants/lemon",
+      "v": 1792815566,
+      "type": "image",
+      "hash": "067636a94d9f421276cb75bf5bc80128",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/teak.webp": {
+      "id": "snp-biotech/plants/teak",
+      "v": 1792815567,
+      "type": "image",
+      "hash": "0d4bad1c4c1b55e938bfa6f65d60e664",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/neem.webp": {
+      "id": "snp-biotech/plants/neem",
+      "v": 1792815567,
+      "type": "image",
+      "hash": "d67f69906eb3105bfb6314ceafeee874",
+      "cloud": "k3r9zeyj"
+    },
+    "/plants/gulmohar.webp": {
+      "id": "snp-biotech/plants/gulmohar",
+      "v": 1792815568,
+      "type": "image",
+      "hash": "935c185ab48c8e923531ca8c0f1387e6",
+      "cloud": "k3r9zeyj"
+    },
+    "/categories/mango.webp": {
+      "id": "snp-biotech/categories/mango",
+      "v": 1792815569,
+      "type": "image",
+      "hash": "e8ba42597e3a2b834aa1f856e4ff56b7",
+      "cloud": "k3r9zeyj"
+    },
+    "/categories/guava.webp": {
+      "id": "snp-biotech/categories/guava",
+      "v": 1792815569,
+      "type": "image",
+      "hash": "dbc0cf22b72612e4ab47fe3d404264ef",
+      "cloud": "k3r9zeyj"
+    },
+    "/categories/citrus.webp": {
+      "id": "snp-biotech/categories/citrus",
+      "v": 1792815570,
+      "type": "image",
+      "hash": "17b4dea9315a15409624eeee6ae740be",
+      "cloud": "k3r9zeyj"
+    },
+    "/categories/more.webp": {
+      "id": "snp-biotech/categories/more",
+      "v": 1792815571,
+      "type": "image",
+      "hash": "2033f3d3362e6568a5e881c330d2dec4",
+      "cloud": "k3r9zeyj"
+    },
+    "/home/rings.webp": {
+      "id": "snp-biotech/home/rings",
+      "v": 1792815572,
+      "type": "image",
+      "hash": "0216012bac9735cb1b73b9d17d0780a7",
+      "cloud": "k3r9zeyj"
+    }
+  }
+}

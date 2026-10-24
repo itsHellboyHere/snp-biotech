@@ -16,7 +16,14 @@ export function aboutPageJsonLd(lang, path) {
     url: site.url,
     logo: `${site.url}/brand/snp-logo.svg`,
     image: `${site.url}/brand/og.jpg`,
-    address: { "@type": "PostalAddress", addressRegion: "Uttar Pradesh", addressCountry: "IN" },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.postal?.street,
+      addressLocality: site.postal?.locality,
+      addressRegion: site.postal?.region ?? "Uttar Pradesh",
+      postalCode: site.postal?.pin,
+      addressCountry: "IN",
+    },
     areaServed: "Uttar Pradesh, India",
   };
 

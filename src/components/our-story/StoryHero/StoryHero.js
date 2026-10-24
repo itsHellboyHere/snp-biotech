@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/media/SmartImage";
 import { ArrowDown } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import SampleTag from "@/components/visit/SampleTag/SampleTag";

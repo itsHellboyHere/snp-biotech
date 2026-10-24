@@ -15,25 +15,37 @@
    Ek din ke do slot bhi chal jaate hain (jaise dopahar ki chhutti):
    { days: [1], open: "08:00", close: "12:30" }, { days: [1], open: "14:00", close: "18:00" } */
 export const HOURS = {
-  confirmed: false, // TODO(client): asli samay
-  week: [
-    { days: [1, 2, 3, 4, 5, 6], open: "08:00", close: "18:00" },
-    { days: [0], open: "08:00", close: "13:00" },
-  ],
+  confirmed: true, // client ne diya (Oct 2026): sat'on din 8–5, ravivaar bhi, mausam mein bhi
+  week: [{ days: [0, 1, 2, 3, 4, 5, 6], open: "08:00", close: "17:00" }],
   // Mausam mein kuch alag ho to (warna null)
   note: {
-    hi: "पौधे लगाने के मौसम (जुलाई–सितंबर) में समय बदल सकता है — आने से पहले एक कॉल कर लें।",
-    en: "Hours may change in planting season (July–September) — please call before you come.",
+    hi: "रविवार सहित सातों दिन खुली — कोई छुट्टी नहीं, पौधे लगाने के मौसम में भी।",
+    en: "Open all 7 days, Sundays included — no holidays, even in planting season.",
   },
 };
 
 /* ---------- रास्ते की पहचान (गाँव में लोग निशान से पहुँचते हैं) ---------- */
 export const LANDMARKS = {
-  confirmed: false, // TODO(client): highway, paas ka gaanv, petrol pump / mandir, board ka rang
+  confirmed: true, // client ne diya (Oct 2026)
   steps: [
-    { icon: "road", text: { hi: "NH-__ से ____ की ओर आइए।", en: "Take NH-__ towards ____." } },
-    { icon: "fuel", text: { hi: "____ पेट्रोल पंप के बाद बाएँ मुड़ें।", en: "Turn left after the ____ petrol pump." } },
-    { icon: "sign", text: { hi: "हरे बोर्ड पर “SNP Biotech” लिखा दिखेगा — वही गेट।", en: "Look for the green “SNP Biotech” board — that's the gate." } },
+    {
+      icon: "road",
+      text: { hi: "मुरादाबाद–नूरपुर रोड पर आइए।", en: "Come on the Moradabad–Noorpur Road." },
+    },
+    {
+      icon: "sign",
+      text: {
+        hi: "अगवानपुर चौराहा — यही पहचान है, नर्सरी यहीं पर है।",
+        en: "Agwanpur Chauraha (crossing) is the landmark — the nursery is right there.",
+      },
+    },
+    {
+      icon: "phone",
+      text: {
+        hi: "रास्ता न मिले तो कॉल कीजिए — 95685 55404",
+        en: "Can't find it? Call us — 95685 55404",
+      },
+    },
   ],
 };
 

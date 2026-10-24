@@ -4,7 +4,7 @@
 import { site } from "@/lib/site";
 import { localize, tr } from "@/i18n/config";
 import { HOURS } from "./visitData";
-import { WEEK, isLive } from "./visitModel";
+import { WEEK, hasGeo, isLive } from "./visitModel";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const hm = (min) => `${String(Math.floor(min / 60)).padStart(2, "0")}:${String(min % 60).padStart(2, "0")}`;
@@ -27,8 +27,10 @@ export function localBusinessJsonLd(lang, path) {
     ),
     address: {
       "@type": "PostalAddress",
-      streetAddress: site.address ? tr(site.address, "en") : undefined,
-      addressRegion: "Uttar Pradesh",
+      streetAddress: site.postal?.street,
+      addressLocality: site.postal?.locality,
+      addressRegion: site.postal?.region ?? "Uttar Pradesh",
+      postalCode: site.postal?.pin,
       addressCountry: "IN",
     },
   };
@@ -36,7 +38,7 @@ export function localBusinessJsonLd(lang, path) {
   const phone = realPhone(site.phone);
   if (phone) data.telephone = phone;
 
-  if (site.geo && isLive(site.geo)) {
+  if (hasGeo) {
     data.geo = { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng };
     data.hasMap = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}`;
   }

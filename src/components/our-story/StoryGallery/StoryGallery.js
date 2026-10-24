@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/media/SmartImage";
 import { useState } from "react";
 import { Expand } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";

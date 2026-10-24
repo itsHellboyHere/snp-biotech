@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/media/SmartImage";
 import { ArrowRight, Check, MessageCircle, PhoneCall, Sprout, Truck, Wallet } from "lucide-react";
 import LocaleLink from "@/i18n/LocaleLink";
 import { useLang } from "@/i18n/LangProvider";

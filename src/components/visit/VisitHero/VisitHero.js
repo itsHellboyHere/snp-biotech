@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/media/SmartImage";
 import { MapPin, Navigation, Phone, MessageCircle } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { LogoMark } from "@/components/nav/Logo";

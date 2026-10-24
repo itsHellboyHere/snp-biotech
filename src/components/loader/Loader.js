@@ -54,8 +54,9 @@ export default function Loader() {
   const active = Boolean(Comp) && phase !== "gone";
 
   useEffect(() => {
-    if (!Comp) return;
     const root = rootRef.current;
+    // Loader screen pe hai hi nahi (pehle khatam ho chuka / Fast Refresh ke baad dobara chala) → kuch mat karo
+    if (!Comp || !root) return;
     const lenis = window.__lenis;
     lenis?.stop();
 
@@ -90,7 +91,10 @@ export default function Loader() {
     let raf = 0;
     const timers = [];
 
+    let finished = false;
     const finish = () => {
+      if (finished) return;
+      finished = true;
       setPhase("done");
       timers.push(
         setTimeout(() => setPhase("exit"), reduce ? 150 : timing.hold),
@@ -112,6 +116,7 @@ export default function Loader() {
     };
 
     const tick = (now) => {
+      if (!rootRef.current) return; // beech mein hat gaya → loop band
       const t = now - start;
       const real = (fontsDone ? 0.35 : 0) + (loadDone ? 0.65 : 0);
       // Asli kaam ruka ho tab bhi dheere badhe (0.9 tak) — "atka hua" na lage
@@ -128,6 +133,18 @@ export default function Loader() {
       else raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
+
+    // Suraksha: browser frames rok de (background tab, chhupi window) tab bhi loader kabhi atke nahi —
+    // MAX_MS ke thodi der baad zabardasti 100% aur site khol do
+    const safety = setTimeout(() => {
+      if (finished || !rootRef.current) return;
+      cancelAnimationFrame(raf);
+      shown = 1;
+      root.style.setProperty("--p", "1");
+      writeCounter(1);
+      finish();
+    }, max + 1200);
+    timers.push(safety);
 
     return () => {
       cancelAnimationFrame(raf);

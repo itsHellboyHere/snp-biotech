@@ -5,12 +5,25 @@ export const site = {
   established: 2016, // TODO: exact saal confirm
   whatsapp: "919568555404", // WhatsApp number, bina "+" ke (91 = India)
   phone: "+919568555404", // calling number
-  // TODO: pura pata (gaanv / tehsil / zila) — footer + Visit page pe dikhta hai
-  address: { hi: "उत्तर प्रदेश", en: "Uttar Pradesh, India" },
-  mapsUrl: null, // TODO: Google Maps ka "Share → Copy link"
-  // TODO: nursery ka asli pin (WhatsApp location se) — abhi NAMOONA (Lucknow), sirf dev mein dikhta hai
-  geo: { lat: 26.8467, lng: 80.9462, confirmed: false },
-  hours: null, // TODO: jaise { hi: "रोज़ सुबह 8 – शाम 6", en: "Daily 8 am – 6 pm" }
+  // Pura pata (client ne diya, Oct 2026) — footer + Visit page + Google (JSON-LD) pe
+  address: {
+    hi: "अगवानपुर चौराहा, मुरादाबाद–नूरपुर रोड, ज़िला मुरादाबाद, उत्तर प्रदेश – 244301",
+    en: "Agwanpur Chauraha, Moradabad–Noorpur Road, District Moradabad, Uttar Pradesh – 244301",
+  },
+  // Google ke liye tukdon mein (schema.org PostalAddress)
+  postal: {
+    street: "Agwanpur Chauraha, Moradabad–Noorpur Road",
+    locality: "Agwanpur",
+    district: "Moradabad",
+    region: "Uttar Pradesh",
+    pin: "244301",
+  },
+  // Google Maps mein ye khoja jaata hai — jab tak asli pin (geo) nahi, map + "रास्ता देखें" isi se
+  mapsQuery: "SNP Biotech, Agwanpur Chauraha, Moradabad–Noorpur Road, Moradabad, Uttar Pradesh 244301",
+  mapsUrl: null, // TODO: Google Maps ka "Share → Copy link" (mile to sabse sateek)
+  // TODO: nursery ka asli pin (WhatsApp location se) — tab tak map pate (mapsQuery) se chalta hai
+  geo: { lat: null, lng: null, confirmed: false },
+  hours: { hi: "रोज़ सुबह 8 – शाम 5 · सातों दिन", en: "Daily 8 am – 5 pm · all 7 days" },
 };
 
 // "+919876543210" / "919876543210" → "+91 98765 43210" (padhne mein aasaan)

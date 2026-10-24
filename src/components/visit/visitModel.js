@@ -87,21 +87,27 @@ export const DAY_NAMES = {
   en: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
 };
 
-/* ---------- Jagah ---------- */
+/* ---------- Jagah ----------
+   Asli pin (site.geo, confirmed: true) mile to wahi — sabse sateek.
+   Tab tak Google Maps mein pata (site.mapsQuery) khojte hain — kabhi galat (namoona) jagah nahi. */
 const GEO = site.geo;
-export const hasGeo = Boolean(GEO && Number.isFinite(GEO.lat) && Number.isFinite(GEO.lng)) && isLive(GEO);
+export const hasGeo = Boolean(GEO?.confirmed && Number.isFinite(GEO.lat) && Number.isFinite(GEO.lng));
+const query = () => encodeURIComponent(site.mapsQuery || "");
 
 // Phone pe seedha Google Maps app ka navigation
 export function directionsUrl() {
   if (hasGeo) return `https://www.google.com/maps/dir/?api=1&destination=${GEO.lat},${GEO.lng}`;
   if (site.mapsUrl) return site.mapsUrl;
+  if (site.mapsQuery) return `https://www.google.com/maps/dir/?api=1&destination=${query()}`;
   return null;
 }
 
 // Tap karne pe hi load hone wala map (API key nahi chahiye)
 export function embedUrl(lang) {
-  if (!hasGeo) return null;
-  return `https://maps.google.com/maps?q=${GEO.lat},${GEO.lng}&z=15&hl=${lang === "en" ? "en" : "hi"}&output=embed`;
+  const hl = lang === "en" ? "en" : "hi";
+  if (hasGeo) return `https://maps.google.com/maps?q=${GEO.lat},${GEO.lng}&z=15&hl=${hl}&output=embed`;
+  if (site.mapsQuery) return `https://maps.google.com/maps?q=${query()}&z=14&hl=${hl}&output=embed`;
+  return null;
 }
 
 // Do jagah ke beech seedhi doori (km) — Haversine

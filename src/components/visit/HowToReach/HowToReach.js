@@ -1,6 +1,6 @@
 "use client";
 
-import { Fuel, Milestone, Route, Landmark, Signpost } from "lucide-react";
+import { Fuel, Milestone, Phone, Route, Landmark, Signpost } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import SampleTag from "../SampleTag/SampleTag";
 import { LANDMARKS } from "../visitData";
@@ -9,10 +9,10 @@ import { VT } from "../visitText";
 import styles from "./HowToReach.module.css";
 
 // Data mein icon ka naam → lucide icon (naya icon chahiye to yahan jodo)
-const ICONS = { road: Route, fuel: Fuel, sign: Signpost, temple: Landmark, milestone: Milestone };
+const ICONS = { road: Route, fuel: Fuel, sign: Signpost, temple: Landmark, milestone: Milestone, phone: Phone };
 
 /* "रास्ते की पहचान" — gaanv mein log nishaan se pahunchte hain:
-   ① NH-__ se … ② petrol pump ke baad baayein ③ hara board */
+   ① Moradabad–Noorpur Road ② Agwanpur Chauraha ③ na mile to call */
 export default function HowToReach() {
   const { t } = useLang();
   const steps = (LANDMARKS.steps ?? []).filter((s) => s?.text);

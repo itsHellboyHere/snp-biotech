@@ -1,11 +1,14 @@
 // =========================================================
 // "बाग़" segment — text (hi / en), video, aur scroll timing ek jagah
 // Video: scripts/build-bagh-video.sh se banti hai (public/bagh/...)
+// Upload hone ke baad Cloudinary se aati hai (har phone ko sahi codec) — warna public/ se
 // =========================================================
 
+import { cldImageUrl, cldVideoUrl } from "@/lib/cloudinary";
+
 export const BAGH_VIDEO = {
-  desktop: { src: "/bagh/bagh-desktop.mp4", poster: "/bagh/poster-desktop.webp" },
-  mobile: { src: "/bagh/bagh-mobile.mp4", poster: "/bagh/poster-mobile.webp" },
+  desktop: { src: cldVideoUrl("/bagh/bagh-desktop.mp4"), poster: cldImageUrl("/bagh/poster-desktop.webp", { width: 1920 }) },
+  mobile: { src: cldVideoUrl("/bagh/bagh-mobile.mp4"), poster: cldImageUrl("/bagh/poster-mobile.webp", { width: 1080 }) },
 };
 
 export const BAGH = {

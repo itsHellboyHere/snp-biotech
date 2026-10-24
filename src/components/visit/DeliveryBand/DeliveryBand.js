@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/media/SmartImage";
 import { MessageCircle } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { whatsappLink } from "@/lib/site";

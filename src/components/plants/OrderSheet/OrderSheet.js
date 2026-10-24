@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/media/SmartImage";
 import { AnimatePresence, motion } from "motion/react";
 import { MessageCircle, Trash2, X, Sprout } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";

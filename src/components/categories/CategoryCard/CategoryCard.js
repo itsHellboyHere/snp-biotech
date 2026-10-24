@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import LocaleLink from "@/i18n/LocaleLink";
 import { useLang } from "@/i18n/LangProvider";
 import { scriptLang } from "@/i18n/config";
-import Image from "next/image";
+import Image from "@/components/media/SmartImage";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MessageCircle, ArrowRight } from "lucide-react";

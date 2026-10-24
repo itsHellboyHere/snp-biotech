@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
+import Image from "@/components/media/SmartImage";
 import { Pause, Play } from "lucide-react";
 import { useLang } from "@/i18n/LangProvider";
 import { scriptLang } from "@/i18n/config";
