@@ -22,6 +22,9 @@ export const site = {
   established: 2016, // TODO: exact saal confirm
   whatsapp: "919568555404", // WhatsApp number, bina "+" ke (91 = India)
   phone: "+919568555404", // calling number
+  // Website ke form (puchhtachh) yahan aate hain — Resend account isi Gmail se bana hai.
+  // Domain verify hone tak Resend SIRF isi email pe bhej sakta hai.
+  enquiryEmail: "snpbiotech5@gmail.com",
   // Pura pata (client ne diya, Oct 2026) — footer + Visit page + Google (JSON-LD) pe
   address: {
     hi: "अगवानपुर चौराहा, मुरादाबाद–नूरपुर रोड, ज़िला मुरादाबाद, उत्तर प्रदेश – 244301",

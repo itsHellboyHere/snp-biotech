@@ -1,9 +1,9 @@
 // =========================================================
 // POST /api/enquiry — website ka form → client ki Gmail (Resend se)
 //
-// .env.local (aur hosting ki settings) mein:
-//   RESEND_API_KEY=re_xxx            ← Resend dashboard → API Keys
-//   ENQUIRY_TO=client@gmail.com      ← kis email pe aaye (comma se kai)
+// .env (aur Vercel → Settings → Environment Variables) mein:
+//   RESEND_API_KEY=re_xxx            ← Resend dashboard → API Keys (SECRET — sirf env mein)
+//   ENQUIRY_TO=…  (optional)         ← warna lib/site.js ka enquiryEmail (snpbiotech5@gmail.com)
 //   ENQUIRY_FROM="SNP Biotech <onboarding@resend.dev>"
 //      (domain verify hone tak resend.dev wala; tab tak email SIRF Resend account
 //       wali Gmail pe hi jaata hai — isliye Resend account client ki Gmail se banana)
@@ -62,7 +62,7 @@ export async function POST(request) {
 
   const mail = buildEnquiryEmail(v.data, { page: typeof body.page === "string" ? body.page.slice(0, 80) : "", site: site.url });
   const key = process.env.RESEND_API_KEY;
-  const to = (process.env.ENQUIRY_TO ?? "")
+  const to = (process.env.ENQUIRY_TO || site.enquiryEmail || "")
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
@@ -73,7 +73,7 @@ export async function POST(request) {
       console.info(`\n──── [enquiry · DEV] email jo jaata ────\nSubject: ${mail.subject}\n${mail.text}\n────────────────────────────────────\n`);
       return json({ ok: true, dev: true });
     }
-    console.error("[enquiry] RESEND_API_KEY / ENQUIRY_TO set nahi hai");
+    console.error("[enquiry] RESEND_API_KEY set nahi hai (ya koi \"to\" email nahi)");
     return json({ ok: false, error: "not_configured" }, 503);
   }
 
