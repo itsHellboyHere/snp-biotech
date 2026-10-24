@@ -1,10 +1,10 @@
 // =========================================================
 // Website ka pura pata (share photo / OG, sitemap, Google ke links isi se bante hain)
 // Kram: NEXT_PUBLIC_SITE_URL → DOMAIN (neeche) → Vercel ka apna pata → localhost
-// Asli domain (jaise snpbiotech.in) live ho jaaye → DOMAIN mein likh do, bas.
-// Tab tak Vercel wala pata — taaki WhatsApp pe link share karne pe photo sahi aaye.
+// Google ko HAMESHA yahi pata batate hain (canonical) — snp-biotech.vercel.app pe
+// "index mat karo" lagta hai (proxy.js), taaki do jagah same site na dikhe.
 // =========================================================
-const DOMAIN = null; // TODO: client ka domain, jaise "https://snpbiotech.in"
+const DOMAIN = "https://snpbiotech.in"; // asli domain (Vercel → Domains mein jud gaya, Oct 2026)
 
 function siteUrl() {
   const clean = (u) => u.replace(/\/+$/, "");
@@ -44,6 +44,9 @@ export const site = {
   // TODO: nursery ka asli pin (WhatsApp location se) — tab tak map pate (mapsQuery) se chalta hai
   geo: { lat: null, lng: null, confirmed: false },
   hours: { hi: "रोज़ सुबह 8 – शाम 5 · सातों दिन", en: "Daily 8 am – 5 pm · all 7 days" },
+  // Google mein "ye wahi business hai" batane ke liye — client ke social pages / Google Maps listing
+  // TODO: jaise "https://www.facebook.com/…", "https://www.instagram.com/…", "https://g.page/…"
+  social: [],
 };
 
 // "+919876543210" / "919876543210" → "+91 98765 43210" (padhne mein aasaan)

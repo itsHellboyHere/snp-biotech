@@ -7,6 +7,7 @@ import StoryPromises from "@/components/our-story/StoryPromises/StoryPromises";
 import StoryGallery from "@/components/our-story/StoryGallery/StoryGallery";
 import StoryVoices from "@/components/our-story/StoryVoices/StoryVoices";
 import StoryCta from "@/components/our-story/StoryCta/StoryCta";
+import JsonLd from "@/components/seo/JsonLd";
 import { aboutPageJsonLd } from "@/components/our-story/storySeo";
 import { PAGES } from "@/content/pages";
 import { pageMetadata } from "@/i18n/seo";
@@ -28,10 +29,7 @@ export default async function OurStoryPage() {
 
   return (
     <main id="main" className={styles.page}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={jsonLd} />
       <StoryHero />
       <StoryTimeline />
       <FounderNote />

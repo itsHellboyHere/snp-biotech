@@ -6,7 +6,8 @@ import BeforeYouCome from "@/components/visit/BeforeYouCome/BeforeYouCome";
 import NurseryGlimpse from "@/components/visit/NurseryGlimpse/NurseryGlimpse";
 import DeliveryBand from "@/components/visit/DeliveryBand/DeliveryBand";
 import EnquiryForm from "@/components/enquiry/EnquiryForm/EnquiryForm";
-import { localBusinessJsonLd } from "@/components/visit/visitSeo";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd, businessJsonLd, webPageJsonLd } from "@/components/seo/schema";
 import { PAGES } from "@/content/pages";
 import { pageMetadata } from "@/i18n/seo";
 import styles from "@/components/visit/VisitPage.module.css";
@@ -22,14 +23,16 @@ export async function generateMetadata({ params }) {
 // Saara data: components/visit/visitData.js + lib/site.js
 export default async function VisitPage() {
   const lang = await rootLang();
-  const jsonLd = localBusinessJsonLd(lang, PAGE.path);
+  // Google: nursery (pata, samay, phone, naksha) + "Contact" page + breadcrumb
+  const jsonLd = [
+    webPageJsonLd(lang, { path: PAGE.path, type: "ContactPage", name: PAGE.meta.title, description: PAGE.meta.description }),
+    businessJsonLd(lang),
+    breadcrumbJsonLd(lang, { path: PAGE.path, name: PAGE.title }),
+  ];
 
   return (
     <main id="main" className={styles.page} data-theme="light">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={jsonLd} />
       <VisitHero />
       <EnquiryForm defaultType="visit" />
       <RouteCard />

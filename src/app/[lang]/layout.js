@@ -10,6 +10,7 @@ import LoaderBoot from "@/components/loader/LoaderBoot";
 import { LangProvider } from "@/i18n/LangProvider";
 import { LOCALES, hasLocale } from "@/i18n/config";
 import { pageMetadata } from "@/i18n/seo";
+import { PAGES } from "@/content/pages";
 import { site } from "@/lib/site";
 
 /* ---------- Fonts ----------
@@ -50,26 +51,38 @@ export function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }));
 }
 
-/* ---------- SEO (har language ka apna) ---------- */
-const SEO = {
-  title: {
-    hi: "SNP Biotech — आपकी भरोसेमंद पौधों की नर्सरी, उत्तर प्रदेश",
-    en: "SNP Biotech — Your Trusted Plant Nursery in Uttar Pradesh",
-  },
-  description: {
-    hi: "10+ साल से उत्तर प्रदेश के किसानों के लिए आम, अमरूद, लीची, चीकू, किन्नू, मौसमी, नींबू, नाशपाती और आँवला के उन्नत कलमी पौधे — साथ में सागवान, नीम और गुलमोहर भी।",
-    en: "For 10+ years, high-quality grafted mango, guava, litchi, chikoo, kinnow, mosambi, lemon, pear and amla plants for farmers across Uttar Pradesh — plus teak, neem and gulmohar.",
-  },
-};
-
+/* ---------- SEO (har language ka apna) ----------
+   Home ka title/description: content/pages.js (PAGES.home). Baaki pages apna-apna dete hain,
+   aur template se peeche " · SNP Biotech" lag jaata hai. */
 export async function generateMetadata({ params }) {
   const { lang } = await params;
-  const base = pageMetadata(lang, "/", SEO);
+  const base = pageMetadata(lang, "/", PAGES.home.meta);
   return {
     ...base,
     metadataBase: new URL(site.url),
     title: { default: base.title, template: "%s · SNP Biotech" },
-    openGraph: { ...base.openGraph, siteName: site.name, type: "website" },
+    applicationName: "SNP Biotech",
+    authors: [{ name: "SNP Biotech", url: site.url }],
+    creator: "CreatorMonk",
+    publisher: "SNP Biotech",
+    category: "agriculture",
+    // Google: poori photo preview + lamba snippet dikhane ki ijaazat
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+    },
+    // iPhone khud numbers / pate ko link na banaye (hum khud sahi links dete hain)
+    formatDetection: { telephone: false, email: false, address: false },
+    // Google Search Console: Vercel → Environment Variables mein GOOGLE_SITE_VERIFICATION
+    ...(process.env.GOOGLE_SITE_VERIFICATION
+      ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
+      : {}),
+    // Local SEO — jagah ka sanket
+    other: {
+      "geo.region": "IN-UP",
+      "geo.placename": "Agwanpur, Moradabad",
+    },
   };
 }
 

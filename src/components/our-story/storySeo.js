@@ -1,44 +1,23 @@
-// Google ke liye "AboutPage" + "Organization" structured data
+// Google ke liye "हमारी कहानी": AboutPage + nursery (wahi @id jo poori site pe) + breadcrumb
 // Sirf CONFIRMED data jaata hai (isConfirmed) — namoona naam / saal kabhi Google tak nahi pahunchta
-import { site } from "@/lib/site";
-import { localize, tr } from "@/i18n/config";
 import { isConfirmed } from "@/lib/live";
+import { tr } from "@/i18n/config";
+import { PAGES } from "@/content/pages";
+import { breadcrumbJsonLd, businessJsonLd, webPageJsonLd } from "@/components/seo/schema";
 import { FOUNDER, MILESTONES } from "./storyData";
 import { FOUNDED_YEAR } from "./storyModel";
 
-const realPhone = (p) => (p && !/0{8,}/.test(p) ? p : null); // "+910000000000" jaisa placeholder nahi
-
 export function aboutPageJsonLd(lang, path) {
-  const org = {
-    "@type": "Organization",
-    "@id": `${site.url}/#organization`,
-    name: site.name,
-    url: site.url,
-    logo: `${site.url}/brand/snp-logo.svg`,
-    image: `${site.url}/brand/og.jpg`,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: site.postal?.street,
-      addressLocality: site.postal?.locality,
-      addressRegion: site.postal?.region ?? "Uttar Pradesh",
-      postalCode: site.postal?.pin,
-      addressCountry: "IN",
-    },
-    areaServed: "Uttar Pradesh, India",
-  };
+  const page = PAGES.story;
+  const business = businessJsonLd(lang);
 
-  // Saal tabhi jab safar (milestones) client ne pakka kiya ho
-  if (isConfirmed(MILESTONES)) org.foundingDate = String(FOUNDED_YEAR);
-  if (isConfirmed(FOUNDER)) org.founder = { "@type": "Person", name: tr(FOUNDER.name, "en") };
-  const phone = realPhone(site.phone);
-  if (phone) org.telephone = phone;
+  // Saal aur sansthapak tabhi jab client ne pakka kiya ho
+  if (isConfirmed(MILESTONES)) business.foundingDate = String(FOUNDED_YEAR);
+  if (isConfirmed(FOUNDER)) business.founder = { "@type": "Person", name: tr(FOUNDER.name, "en") };
 
-  return {
-    "@context": "https://schema.org",
-    "@type": "AboutPage",
-    name: tr({ hi: "हमारी कहानी — SNP Biotech", en: "Our Story — SNP Biotech" }, lang),
-    url: `${site.url}${localize(lang, path)}`,
-    inLanguage: lang === "en" ? "en-IN" : "hi-IN",
-    mainEntity: org,
-  };
+  return [
+    webPageJsonLd(lang, { path, type: "AboutPage", name: page.meta.title, description: page.meta.description }),
+    business,
+    breadcrumbJsonLd(lang, { path, name: page.title }),
+  ];
 }

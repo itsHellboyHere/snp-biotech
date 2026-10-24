@@ -7,6 +7,8 @@ import { PAGES } from "@/content/pages";
 import { pageMetadata } from "@/i18n/seo";
 import { localize, tr } from "@/i18n/config";
 import { site } from "@/lib/site";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd, webPageJsonLd } from "@/components/seo/schema";
 import styles from "@/components/plants/PlantsExplorer.module.css";
 
 const PAGE = PAGES.plants;
@@ -21,28 +23,36 @@ export async function generateMetadata({ params }) {
 export default async function PlantsPage() {
   const lang = await rootLang();
 
-  // Google ke liye: is page pe kaun-kaun se paudhe hain (structured data)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: tr(PAGE.meta.title, lang),
-    url: `${site.url}${localize(lang, PAGE.path)}`,
-    itemListElement: PLANTS.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: `${p.name[lang] ?? p.name.hi} (${p.name[lang === "en" ? "hi" : "en"]})`,
-      url: `${site.url}${localize(lang, `${PAGE.path}?plant=${p.id}`)}`,
-      image: `${site.url}${p.shot}`,
-    })),
-  };
+  // Google ke liye: ye page + breadcrumb + is page pe kaun-kaun se paudhe hain
+  const listUrl = `${site.url}${localize(lang, PAGE.path)}`;
+  const jsonLd = [
+    webPageJsonLd(lang, {
+      path: PAGE.path,
+      type: "CollectionPage",
+      name: PAGE.meta.title,
+      description: PAGE.meta.description,
+      image: PLANTS[0]?.shot,
+    }),
+    breadcrumbJsonLd(lang, { path: PAGE.path, name: PAGE.title }),
+    {
+      "@type": "ItemList",
+      "@id": `${listUrl}#plants`,
+      name: tr(PAGE.meta.title, lang),
+      url: listUrl,
+      numberOfItems: PLANTS.length,
+      itemListElement: PLANTS.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: `${p.name[lang] ?? p.name.hi} (${p.name[lang === "en" ? "hi" : "en"]})`,
+        url: `${site.url}${localize(lang, `${PAGE.path}?plant=${p.id}`)}`,
+        image: `${site.url}${p.shot}`,
+      })),
+    },
+  ];
 
   return (
     <main id="main" className={styles.page} data-theme="light">
-      <script
-        type="application/ld+json"
-        // "<" escape — data mein kabhi kuch ajeeb aaye to bhi script tag na toote
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={jsonLd} />
       <PlantsExplorer />
       <GrowthScroll />
       <BulkBand />
