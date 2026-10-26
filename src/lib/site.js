@@ -25,6 +25,8 @@ export const site = {
   // Website ke form (puchhtachh) yahan aate hain — Resend account isi Gmail se bana hai.
   // Domain verify hone tak Resend SIRF isi email pe bhej sakta hai.
   enquiryEmail: "snpbiotech5@gmail.com",
+  // Email kis naam/pate se aaye — snpbiotech.in Resend mein verify (inbox ki zaroorat nahi, sirf bhejne ka naam)
+  enquiryFrom: "SNP Biotech Website <enquiry@snpbiotech.in>",
   // Pura pata (client ne diya, Oct 2026) — footer + Visit page + Google (JSON-LD) pe
   address: {
     hi: "अगवानपुर चौराहा, मुरादाबाद–नूरपुर रोड, ज़िला मुरादाबाद, उत्तर प्रदेश – 244301",

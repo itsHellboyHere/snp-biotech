@@ -105,7 +105,9 @@ export function websiteJsonLd(lang) {
 }
 
 // ---------- Har page (WebPage / AboutPage / ContactPage / CollectionPage) ----------
-export function webPageJsonLd(lang, { path, type = "WebPage", name, description, image }) {
+// breadcrumb: Home pe nahi (wahan Home › kuch nahi hota) — andar ke pages pe hamesha.
+// Jahan ye true hai, us page pe breadcrumbJsonLd() bhi zaroor dena (warna Google "khaali breadcrumb" error deta hai)
+export function webPageJsonLd(lang, { path, type = "WebPage", name, description, image, breadcrumb = path !== "/" }) {
   const url = abs(localize(lang, path));
   return {
     "@type": type,
@@ -117,7 +119,7 @@ export function webPageJsonLd(lang, { path, type = "WebPage", name, description,
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": BUSINESS_ID },
     primaryImageOfPage: { "@type": "ImageObject", url: abs(image ?? "/brand/og.jpg") },
-    breadcrumb: { "@id": `${url}#breadcrumb` },
+    ...(breadcrumb ? { breadcrumb: { "@id": `${url}#breadcrumb` } } : {}),
   };
 }
 

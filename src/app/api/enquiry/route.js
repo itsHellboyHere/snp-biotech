@@ -4,9 +4,9 @@
 // .env (aur Vercel → Settings → Environment Variables) mein:
 //   RESEND_API_KEY=re_xxx            ← Resend dashboard → API Keys (SECRET — sirf env mein)
 //   ENQUIRY_TO=…  (optional)         ← warna lib/site.js ka enquiryEmail (snpbiotech5@gmail.com)
-//   ENQUIRY_FROM="SNP Biotech <onboarding@resend.dev>"
-//      (domain verify hone tak resend.dev wala; tab tak email SIRF Resend account
-//       wali Gmail pe hi jaata hai — isliye Resend account client ki Gmail se banana)
+//   ENQUIRY_FROM=…  (optional)       ← warna lib/site.js ka enquiryFrom (SNP Biotech <enquiry@snpbiotech.in>)
+//      snpbiotech.in Resend mein verify hai (GoDaddy auto-configure). Verify na ho to
+//      apne aap resend.dev se jaata hai (tab sirf Resend account wali Gmail tak).
 //
 // Key nahi hai? Dev mein email console mein dikhta hai (form poora test ho jaata hai).
 // Production mein bina key → 503, aur form visitor ko WhatsApp ka rasta dikhata hai.
@@ -20,6 +20,7 @@ import { site } from "@/lib/site";
 
 const MAX_BODY = 20_000; // ~20KB — isse bada form ho hi nahi sakta
 const MIN_FILL_MS = 2500; // isse jaldi bhara form = bot
+const FALLBACK_FROM = "SNP Biotech Website <onboarding@resend.dev>"; // Resend ka test sender (sirf account wali Gmail tak)
 const isDev = process.env.NODE_ENV !== "production";
 
 const json = (data, status = 200) => NextResponse.json(data, { status, headers: { "Cache-Control": "no-store" } });
@@ -78,17 +79,21 @@ export async function POST(request) {
   }
 
   // 8. Resend se bhejo (SDK ki zaroorat nahi — seedha API)
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
+  //    Pehle apne domain se (enquiry@snpbiotech.in) — spam mein nahi girta.
+  //    Domain abhi verify nahi hua → Resend mana karta hai → wahi email resend.dev se (kabhi khoye nahi).
+  //    Reply-To = client ki Gmail: notification pe "Reply" dabaye to sahi jagah jaaye.
+  const send = (from, idemKey) =>
+    fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
-        ...(id ? { "Idempotency-Key": id } : {}),
+        ...(idemKey ? { "Idempotency-Key": idemKey } : {}),
       },
       body: JSON.stringify({
-        from: process.env.ENQUIRY_FROM || "SNP Biotech Website <onboarding@resend.dev>",
+        from,
         to,
+        ...(site.enquiryEmail ? { reply_to: site.enquiryEmail } : {}),
         subject: mail.subject,
         html: mail.html,
         text: mail.text,
@@ -96,6 +101,19 @@ export async function POST(request) {
       }),
       signal: AbortSignal.timeout(10_000),
     });
+
+  try {
+    let res = await send(process.env.ENQUIRY_FROM || site.enquiryFrom || FALLBACK_FROM, id);
+    if (!res.ok && (res.status === 403 || res.status === 422)) {
+      const why = await res.text().catch(() => "");
+      if (/domain|verif/i.test(why)) {
+        console.warn("[enquiry] domain abhi verify nahi — resend.dev se bhej rahe hain");
+        res = await send(FALLBACK_FROM, id ? `${id}-fb` : null);
+      } else {
+        console.error("[enquiry] Resend error", res.status, why);
+        return json({ ok: false, error: "send_failed" }, 502);
+      }
+    }
     if (!res.ok) {
       console.error("[enquiry] Resend error", res.status, await res.text().catch(() => ""));
       return json({ ok: false, error: "send_failed" }, 502);
