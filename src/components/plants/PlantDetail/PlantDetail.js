@@ -110,22 +110,40 @@ function DetailBody({ plant, variety, onVariety }) {
   const v = getVariety(plant, variety);
   const isFruit = plant.harvest.length > 0;
 
-  const tabs = [
-    {
-      id: "shot",
-      label: isFruit ? PT.tabFruit : PT.tabLeaf,
-      src: v?.img ?? plant.shot,
-    },
-    plant.tree !== plant.shot
-      ? { id: "tree", label: PT.tabTree, src: plant.tree }
-      : null,
-    ...plant.realPhotos.map((src, i) => ({
-      id: `real-${i}`,
-      label: PT.tabReal,
-      src,
-      real: i,
-    })),
-  ].filter(Boolean);
+  // Asli photo wale paudhe: pehle nursery ka paudha, phir kism ka fal (agar hai), phir fal ke saath
+  // Baaki: purana tareeka — fal / jhalak, phir pedh
+  const tabs = (
+    plant.real
+      ? [
+          { id: "shot", label: PT.tabPlant, src: plant.shot },
+          v?.img ? { id: "fruit", label: PT.tabFruit, src: v.img } : null,
+          plant.tree !== plant.shot
+            ? { id: "tree", label: PT.tabInFruit, src: plant.tree }
+            : null,
+          ...plant.realPhotos.map((src, i) => ({
+            id: `real-${i}`,
+            label: PT.tabMore,
+            src,
+            real: i,
+          })),
+        ]
+      : [
+          {
+            id: "shot",
+            label: isFruit ? PT.tabFruit : PT.tabLeaf,
+            src: v?.img ?? plant.shot,
+          },
+          plant.tree !== plant.shot
+            ? { id: "tree", label: PT.tabTree, src: plant.tree }
+            : null,
+          ...plant.realPhotos.map((src, i) => ({
+            id: `real-${i}`,
+            label: PT.tabReal,
+            src,
+            real: i,
+          })),
+        ]
+  ).filter(Boolean);
   const [tab, setTab] = useState("shot");
   const current = tabs.find((x) => x.id === tab) ?? tabs[0];
 

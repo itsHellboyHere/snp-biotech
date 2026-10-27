@@ -77,6 +77,9 @@ export const PT = {
   tabLeaf: { hi: "झलक", en: "Close-up" },
   tabTree: { hi: "पेड़", en: "Tree" },
   tabReal: { hi: "असली पौधा", en: "Real plant" },
+  tabPlant: { hi: "पौधा", en: "Plant" },
+  tabInFruit: { hi: "फल के साथ", en: "In fruit" },
+  tabMore: { hi: "और", en: "More" },
   photoTabs: { hi: "फ़ोटो", en: "Photos" },
   variety: { hi: "किस्म चुनें", en: "Choose a variety" },
   facts: {

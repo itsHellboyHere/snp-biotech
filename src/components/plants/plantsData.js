@@ -18,9 +18,10 @@
   name: { hi: "जामुन", en: "Jamun" },
   aka: ["jamun", "java plum"],          // search ke liye aur naam (Hinglish spelling bhi)
   line: { hi: "…", en: "…" },           // ek line — detail panel mein
-  shot: "/plants/jamun.webp",           // ivory background wali "product" photo (900px, 1:1)
-  tree: "/hero-trees/jamun.webp",       // asli pedh ki photo (1:1)
+  shot: "/plants/real/jamun-1.webp",    // card ki main photo — nursery mein thaili wala paudha (1:1)
+  tree: "/plants/real/jamun-2.webp",    // doosri photo — fal ke saath (desktop hover + detail tab) (1:1)
   realPhotos: [],                       // client ki asli nursery photos (detail mein "असली पौधा" tab)
+  real: true,                           // shot/tree client ki ASLI photos hain? (tab: पौधा · फल के साथ · और)
   grafted: true,                        // कलमी? (card pe tag)
   months: [6, 7, 8],                    // lagane ke mahine · 0 = जनवरी … 11 = दिसंबर
   harvest: [5, 6],                      // fal ke mahine (na ho to [] )
@@ -46,6 +47,8 @@ export const CATEGORIES = [
 export const CATEGORY_ALIASES = { more: "fruit", fruits: "fruit", lemon: "citrus" };
 
 // TODO(client): har paudhe ke mahine, dooriyan aur kismein confirm (UP ke hisaab se aam andaaza hai)
+// Order = grid ka order. Asli photo (real: true) wale pehle; baaki (namoona photo) unke baad.
+// TODO(client): pear, amla, teak, neem, gulmohar ki asli photos aate hi unhe bhi real: true karo.
 export const PLANTS = [
   {
     id: "mango",
@@ -56,8 +59,10 @@ export const PLANTS = [
       hi: "फलों का राजा — उत्तर प्रदेश का सबसे प्यारा पेड़।",
       en: "The king of fruits — Uttar Pradesh's favourite tree.",
     },
-    shot: "/plants/mango-dasheri.webp",
-    tree: "/hero-trees/mango.webp",
+    // Client ki asli nursery photos (scripts/build-real-photos.py)
+    shot: "/plants/real/mango-1.webp",
+    tree: "/plants/real/mango-2.webp",
+    real: true,
     grafted: true,
     months: [6, 7, 8],
     harvest: [5, 6],
@@ -98,8 +103,10 @@ export const PLANTS = [
       hi: "जल्दी फल देने वाला, घर और बाग़ दोनों के लिए।",
       en: "Quick to bear fruit — for homes and orchards alike.",
     },
-    shot: "/plants/guava-taiwan.webp",
-    tree: "/hero-trees/guava.webp",
+    // Client ki asli nursery photos (scripts/build-real-photos.py)
+    shot: "/plants/real/guava-1.webp",
+    tree: "/plants/real/guava-2.webp",
+    real: true,
     grafted: true,
     months: [1, 2, 6, 7, 8],
     harvest: [10, 11, 0],
@@ -131,8 +138,9 @@ export const PLANTS = [
     name: { hi: "लीची", en: "Litchi" },
     aka: ["lichi", "litchi", "lychee", "shahi"],
     line: { hi: "गर्मियों की मिठास — रसीली, ख़ुशबूदार।", en: "The sweetness of summer — juicy and fragrant." },
-    shot: "/plants/litchi.webp",
-    tree: "/hero-trees/litchi.webp",
+    // Client ki asli nursery photos (scripts/build-real-photos.py)
+    shot: "/plants/real/litchi-1.webp",
+    real: true,
     grafted: true,
     months: [7, 8],
     harvest: [4, 5],
@@ -148,8 +156,10 @@ export const PLANTS = [
     name: { hi: "चीकू", en: "Chikoo" },
     aka: ["chiku", "chikoo", "sapota", "sapodilla", "kalipatti"],
     line: { hi: "शहद जैसा मीठा, साल में दो बार फल।", en: "Honey-sweet, fruits twice a year." },
-    shot: "/plants/chikoo.webp",
-    tree: "/hero-trees/chikoo.webp",
+    // Client ki asli nursery photos (scripts/build-real-photos.py)
+    shot: "/plants/real/chikoo-1.webp",
+    tree: "/plants/real/chikoo-2.webp",
+    real: true,
     grafted: true,
     months: [1, 2, 6, 7, 8],
     harvest: [1, 2, 3],
@@ -158,6 +168,51 @@ export const PLANTS = [
       { id: "kalipatti", name: { hi: "काली पत्ती", en: "Kalipatti" }, note: { hi: "मीठा, अंडाकार फल", en: "Sweet, oval fruit" } },
       { id: "cricket-ball", name: { hi: "क्रिकेट बॉल", en: "Cricket Ball" }, note: { hi: "बड़ा, गोल फल", en: "Big, round fruit" } },
     ],
+  },
+  {
+    id: "kinnow",
+    category: "citrus",
+    name: { hi: "किन्नू", en: "Kinnow" },
+    aka: ["kinnu", "kinnow", "kino", "santra", "mandarin", "orange"],
+    line: { hi: "सर्दियों का रसीला संतरा — जूस के लिए सबसे अच्छा।", en: "Winter's juicy mandarin — best for juice." },
+    // Client ki asli nursery photos (scripts/build-real-photos.py)
+    shot: "/plants/real/kinnow-1.webp",
+    tree: "/plants/real/kinnow-2.webp",
+    real: true,
+    grafted: true,
+    months: [1, 2, 6, 7, 8],
+    harvest: [11, 0, 1],
+    spacing: [6, 6],
+  },
+  {
+    id: "mosambi",
+    category: "citrus",
+    name: { hi: "मौसमी", en: "Mosambi" },
+    aka: ["mosambi", "mausami", "musambi", "sweet lime", "sweet lemon"],
+    line: { hi: "हल्का मीठा, रस से भरा — हर घर का फल।", en: "Mildly sweet and full of juice — a household favourite." },
+    // Client ki asli nursery photos (scripts/build-real-photos.py)
+    shot: "/plants/real/mosambi-1.webp",
+    tree: "/plants/real/mosambi-2.webp",
+    real: true,
+    grafted: true,
+    months: [1, 2, 6, 7, 8],
+    harvest: [9, 10, 11],
+    spacing: [6, 6],
+  },
+  {
+    id: "lemon",
+    category: "citrus",
+    name: { hi: "कागज़ी नींबू", en: "Kagzi Lemon" },
+    aka: ["nimbu", "neembu", "nimboo", "lemon", "lime", "kagzi", "kagji"],
+    line: { hi: "पतला छिलका, ख़ूब रस — साल भर काम का।", en: "Thin skin, lots of juice — useful all year." },
+    // Client ki asli nursery photos (scripts/build-real-photos.py)
+    shot: "/plants/real/lemon-1.webp",
+    tree: "/plants/real/lemon-2.webp",
+    real: true,
+    grafted: true,
+    months: [1, 2, 6, 7, 8],
+    harvest: [6, 7, 8, 9],
+    spacing: [6, 6],
   },
   {
     id: "pear",
@@ -188,45 +243,6 @@ export const PLANTS = [
       { id: "na-7", name: { hi: "NA-7", en: "NA-7" }, note: { hi: "बड़ा फल, भरपूर पैदावार", en: "Big fruit, heavy yield" } },
       { id: "chakaiya", name: { hi: "चकैया", en: "Chakaiya" }, note: { hi: "अचार-मुरब्बे के लिए", en: "Great for pickle and murabba" } },
     ],
-  },
-  {
-    id: "kinnow",
-    category: "citrus",
-    name: { hi: "किन्नू", en: "Kinnow" },
-    aka: ["kinnu", "kinnow", "kino", "santra", "mandarin", "orange"],
-    line: { hi: "सर्दियों का रसीला संतरा — जूस के लिए सबसे अच्छा।", en: "Winter's juicy mandarin — best for juice." },
-    shot: "/plants/kinnow.webp",
-    tree: "/hero-trees/kinnow.webp",
-    grafted: true,
-    months: [1, 2, 6, 7, 8],
-    harvest: [11, 0, 1],
-    spacing: [6, 6],
-  },
-  {
-    id: "mosambi",
-    category: "citrus",
-    name: { hi: "मौसमी", en: "Mosambi" },
-    aka: ["mosambi", "mausami", "musambi", "sweet lime", "sweet lemon"],
-    line: { hi: "हल्का मीठा, रस से भरा — हर घर का फल।", en: "Mildly sweet and full of juice — a household favourite." },
-    shot: "/plants/mosambi.webp",
-    tree: "/hero-trees/mosambi.webp",
-    grafted: true,
-    months: [1, 2, 6, 7, 8],
-    harvest: [9, 10, 11],
-    spacing: [6, 6],
-  },
-  {
-    id: "lemon",
-    category: "citrus",
-    name: { hi: "कागज़ी नींबू", en: "Kagzi Lemon" },
-    aka: ["nimbu", "neembu", "nimboo", "lemon", "lime", "kagzi", "kagji"],
-    line: { hi: "पतला छिलका, ख़ूब रस — साल भर काम का।", en: "Thin skin, lots of juice — useful all year." },
-    shot: "/plants/lemon.webp",
-    tree: "/hero-trees/lemon.webp",
-    grafted: true,
-    months: [1, 2, 6, 7, 8],
-    harvest: [6, 7, 8, 9],
-    spacing: [6, 6],
   },
   {
     id: "teak",

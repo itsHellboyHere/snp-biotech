@@ -84,6 +84,8 @@ function cleanPlant(raw, index, catIds, seenIds) {
     shot: shot ?? tree,
     tree: tree ?? shot,
     realPhotos: Object.freeze((Array.isArray(raw.realPhotos) ? raw.realPhotos : []).map(path).filter(Boolean)),
+    // true = shot / tree client ki ASLI nursery photos hain (detail ke tab ke naam badalte hain)
+    real: raw.real === true,
     grafted: raw.grafted !== false,
     months: Object.freeze(months(raw.months)),
     harvest: Object.freeze(months(raw.harvest)),

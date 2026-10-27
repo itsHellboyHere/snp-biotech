@@ -1,5 +1,4 @@
 // Hero ka text + band ki tiles — dono languages { hi, en }.
-// Grok ki nayi images aane pe bas `src` badlo.
 export const HERO = {
   eyebrow: { hi: "10+ साल का भरोसा · उत्तर प्रदेश", en: "10+ years of trust · Uttar Pradesh" },
   titleLines: {
@@ -14,31 +13,33 @@ export const HERO = {
   secondary: { label: { hi: "WhatsApp पर पूछें", en: "Ask on WhatsApp" } },
 };
 
-// Grok se bani asli pedh ki tasveerein (zameen mein lage, ek jaisi roshni) — scripts/build-hero-trees.py
-// TODO: client ki list aane pe sagwan / neem / aamla / gulmohar bhi (public/hero-trees mein taiyaar hain)
-const G = "/hero-trees";
+// Client ki ASLI nursery photos (720px, 1:1) — scripts/build-real-photos.py banata hai
+// Nayi photo: media-src/client-photos mein daalo → script mein "hero? True" → yahan ek tile
+// (Purani Grok wali pedh ki photos public/hero-trees mein padi hain — ab hero mein nahi)
+// TODO(client): nashpati, aamla, sagwan, neem, gulmohar ki asli photo aaye to unki tile bhi
+const R = "/hero-real";
 
 // Photo tile: name = bada naam (page ki language), sub = chhota naam (doosri language)
 // Brand tile: big + small
 export const HERO_TILES = [
   {
     type: "photo",
-    src: `${G}/mango.webp`,
+    src: `${R}/mango-2.webp`,
     name: { hi: "आम", en: "Mango" },
     sub: { hi: "Mango", en: "आम" },
-    alt: { hi: "फलों से लदा आम का पेड़", en: "A mango tree loaded with fruit" },
+    alt: { hi: "नर्सरी की कतारों के बीच आम का कलमी पौधा", en: "A grafted mango plant between nursery rows" },
   },
   { type: "brand", big: { hi: "10+ साल", en: "10+ years" }, small: { hi: "नर्सरी का अनुभव", en: "of nursery experience" } },
   {
     type: "photo",
-    src: `${G}/guava.webp`,
+    src: `${R}/guava-1.webp`,
     name: { hi: "अमरूद", en: "Guava" },
     sub: { hi: "Taiwan pink guava", en: "ताइवान पिंक अमरूद" },
-    alt: { hi: "अमरूद का पेड़", en: "A guava tree" },
+    alt: { hi: "थैली में लगे ताइवान पिंक अमरूद के तीन पौधे", en: "Three Taiwan pink guava plants in grow bags" },
   },
   {
     type: "photo",
-    src: `${G}/litchi.webp`,
+    src: `${R}/litchi-1.webp`,
     name: { hi: "लीची", en: "Litchi" },
     sub: { hi: "Litchi", en: "लीची" },
     alt: { hi: "लाल लीचियों से लदा पेड़", en: "A litchi tree with red fruit" },
@@ -46,38 +47,31 @@ export const HERO_TILES = [
   { type: "brand", big: { hi: "कलमी", en: "Grafted" }, small: { hi: "ग्राफ्टेड पौधे, जल्दी फल", en: "plants that fruit sooner" } },
   {
     type: "photo",
-    src: `${G}/chikoo.webp`,
+    src: `${R}/chikoo-2.webp`,
     name: { hi: "चीकू", en: "Chikoo" },
     sub: { hi: "Chikoo", en: "चीकू" },
-    alt: { hi: "चीकू का पेड़", en: "A chikoo tree" },
+    alt: { hi: "गमले में फलों से लदा चीकू का पेड़", en: "A potted chikoo tree full of fruit" },
   },
   {
     type: "photo",
-    src: `${G}/kinnow.webp`,
+    src: `${R}/kinnow-2.webp`,
     name: { hi: "किन्नू", en: "Kinnow" },
     sub: { hi: "Kinnow", en: "किन्नू" },
-    alt: { hi: "संतरी किन्नुओं से लदा पेड़", en: "A kinnow tree full of orange fruit" },
+    alt: { hi: "हरे किन्नुओं से लदा पौधा", en: "A kinnow plant loaded with green fruit" },
   },
   { type: "brand", big: { hi: "सीधे नर्सरी से", en: "Nursery direct" }, small: { hi: "आपके खेत तक", en: "to your farm" } },
   {
     type: "photo",
-    src: `${G}/mosambi.webp`,
+    src: `${R}/mosambi-1.webp`,
     name: { hi: "मौसमी", en: "Mosambi" },
     sub: { hi: "Mosambi", en: "मौसमी" },
-    alt: { hi: "मौसमी का पेड़", en: "A mosambi tree" },
+    alt: { hi: "थैली में फल लगा मौसमी का पौधा", en: "A fruiting mosambi plant in a grow bag" },
   },
   {
     type: "photo",
-    src: `${G}/lemon.webp`,
+    src: `${R}/lemon-1.webp`,
     name: { hi: "कागज़ी नींबू", en: "Kagzi lemon" },
     sub: { hi: "Kagzi lemon", en: "कागज़ी नींबू" },
-    alt: { hi: "पीले नींबुओं से लदा पेड़", en: "A lemon tree with yellow lemons" },
-  },
-  {
-    type: "photo",
-    src: `${G}/pear.webp`,
-    name: { hi: "नाशपाती", en: "Pear" },
-    sub: { hi: "Pear", en: "नाशपाती" },
-    alt: { hi: "नाशपाती का पेड़", en: "A pear tree" },
+    alt: { hi: "थैली में नींबू लगा कागज़ी नींबू का पौधा", en: "A Kagzi lemon plant with fruit, in a grow bag" },
   },
 ];

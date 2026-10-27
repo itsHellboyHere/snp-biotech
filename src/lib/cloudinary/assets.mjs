@@ -3,7 +3,7 @@
 //
 // Kya hai:  bhaari video + permanent photos jo next/image se baar-baar alag size mein maangi jaati hain
 // Kya NAHI: scroll frames (hero, growth — Vercel pe hi theek), namoona (AI) photos
-//           (client ki asli aate hi unhe yahan jodo), chhote tiles, logo/og image
+//           (client ki asli aate hi unhe yahan jodo — /plants/real wali jud chuki hain), chhote tiles, logo/og image
 //
 // Nayi file jodni ho: path yahan likho → Terminal mein `npm run media:upload`
 // (sirf nayi / badli hui file upload hoti hai, baaki chhod deta hai)
@@ -36,6 +36,21 @@ export const CLOUDINARY_ASSETS = [
   "/plants/teak.webp",
   "/plants/neem.webp",
   "/plants/gulmohar.webp",
+
+  // ---------- Client ki ASLI nursery photos (scripts/build-real-photos.py) ----------
+  "/plants/real/mango-1.webp",
+  "/plants/real/mango-2.webp",
+  "/plants/real/guava-1.webp",
+  "/plants/real/guava-2.webp",
+  "/plants/real/litchi-1.webp",
+  "/plants/real/chikoo-1.webp",
+  "/plants/real/chikoo-2.webp",
+  "/plants/real/kinnow-1.webp",
+  "/plants/real/kinnow-2.webp",
+  "/plants/real/mosambi-1.webp",
+  "/plants/real/mosambi-2.webp",
+  "/plants/real/lemon-1.webp",
+  "/plants/real/lemon-2.webp",
 
   // ---------- Home ----------
   "/categories/mango.webp",
